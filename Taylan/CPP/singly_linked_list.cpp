@@ -10,7 +10,13 @@ namespace std{
 		Node(){}
 		// setters and getters
 		void setData(int Data){ _data = Data;}
-		void setNext(Node *Next){ _next = Next;}
+		void setNext(Node *Next){ 
+			if(Next == NULL){
+				_next = NULL;
+			}else{
+			_next = Next;
+			}
+		}
 		int Data(){return _data;}
 		Node *Next(){return _next;}
 	};
@@ -24,9 +30,9 @@ namespace std{
 		void insert_Back(int data);//it will append the next value to the
 									//front cell [x] -> [data]
 		//bool is_Empty();
-		//TODO:: Add init();
 		void init_list(int data);
 		void print_List();
+		int size();
 	};
 
 	void LinkedList::print_List(){
@@ -92,8 +98,17 @@ namespace std{
 		head = newNode;
 	}
 
-
-
+	int LinkedList::size(){
+		//counter variable
+		int ctr = 0;
+		Node *tmp = head;
+		
+		while(tmp!=NULL){
+			ctr++;
+			tmp = tmp->Next();
+		}
+		return ctr;
+	}
 
 
 }
@@ -106,4 +121,5 @@ int main(){
 	list.init_list(5);
 	list.insert_Back(6);
 	list.print_List();
+	std::cout<<list.size();//output2.
 }
