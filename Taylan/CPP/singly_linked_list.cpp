@@ -29,7 +29,7 @@ namespace std{
 		/*TODO: insert back will be added. */
 		void insert_Back(int data);//it will append the next value to the
 									//front cell [x] -> [data]
-		bool is_Empty();
+		bool isEmpty();
 		void init_list(int data);
 		void print_List();
 		int size();
