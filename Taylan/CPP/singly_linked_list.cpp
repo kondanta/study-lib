@@ -24,6 +24,7 @@ namespace std{
 		void insert_Back(int data);//it will append the next value to the
 									//front cell [x] -> [data]
 		//bool is_Empty();
+		//TODO:: Add init();
 		void print_List();
 	};
 
@@ -83,4 +84,14 @@ namespace std{
 
 
 
+}
+
+int main(){
+	//Creating a list
+	std::LinkedList list;
+
+	//Initilizing it with 5
+	list.insert_Back(5);
+	list.insert_Back(6);
+	list.print_List();
 }
