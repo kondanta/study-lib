@@ -29,7 +29,7 @@ namespace std{
 		/*TODO: insert back will be added. */
 		void insert_Back(int data);//it will append the next value to the
 									//front cell [x] -> [data]
-		//bool is_Empty();
+		bool is_Empty();
 		void init_list(int data);
 		void print_List();
 		int size();
@@ -110,6 +110,12 @@ namespace std{
 		return ctr;
 	}
 
+	bool LinkedList::isEmpty(){
+		Node *tmp = head;
+		if(tmp == NULL)
+			return true;
+		return false;
+	}
 
 }
 
