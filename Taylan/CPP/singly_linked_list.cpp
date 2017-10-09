@@ -86,7 +86,9 @@ namespace std{
 		newNode->setData(data);
 		newNode->setNext(NULL);
 		//Setting head to the NULL so that we can make the our data the head.
-		head = NULL;
+		if(head != NULL){
+			head = NULL;
+		}
 		head = newNode;
 	}
 
