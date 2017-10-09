@@ -25,6 +25,7 @@ namespace std{
 									//front cell [x] -> [data]
 		//bool is_Empty();
 		//TODO:: Add init();
+		void init_list(int data);
 		void print_List();
 	};
 
@@ -79,6 +80,15 @@ namespace std{
 		}
 	}
 
+	void LinkedList::init_list(int data){
+		//creating a node
+		Node *newNode = new Node();
+		newNode->setData(data);
+		newNode->setNext(NULL);
+		//Setting head to the NULL so that we can make the our data the head.
+		head = NULL;
+		head = newNode;
+	}
 
 
 
@@ -91,7 +101,7 @@ int main(){
 	std::LinkedList list;
 
 	//Initilizing it with 5
-	list.insert_Back(5);
+	list.init_list(5);
 	list.insert_Back(6);
 	list.print_List();
 }
