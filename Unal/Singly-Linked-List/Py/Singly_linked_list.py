@@ -52,10 +52,27 @@ class linkedList(object):
             else:
                 current = current.get_next()
         if current is None:
-            #raise ValueError("Data is not in the list")
             return "Item was not found."
         return "Item exists."
-        
+
+    # Delete the said item from list // O(n) in worst case
+    def remove(self, data):
+        current = self.head
+        previous = None # Major difference between search and delete
+        found = False
+        while current and found is False:
+            if current.get_data() == data:
+                found = True
+            else:
+                previous = current
+                current = current.get_next()
+        if current is None: # Case of not having the item
+            print("Item is not in the list.")
+        elif previous is None: # Case of being first item
+            self.head = current.get_next()
+        else:
+            previous.set_next(current.get_next())
+
     def __repr__(self):
         node = self.head
         data = []
@@ -82,7 +99,19 @@ print("Size:")
 print(ll.size())
 
 # Search
-print("Searching 3:")
+print("Searching 3...")
 print(ll.search("3"))
-print("Searching 7:")
+print("Searching 7...")
 print(ll.search("7"))
+
+# Remove
+print("Removing 3...")
+ll.remove("3")
+# 4 2 2 1
+print(ll)
+print("Removing 2...")
+ll.remove("2")
+# 4 2 1
+print(ll)
+print("Removing 9...")
+ll.remove("9")
