@@ -35,6 +35,8 @@ namespace std{
 		void print_List();
 		int size();
 		void insert_into(int location, int data);
+		int value_at(int index);
+		int value_form_tail(int index);
 	};
 
 	void LinkedList::print_List(){
@@ -151,6 +153,27 @@ namespace std{
 		}
 	}
 
+	int LinkedList::value_at(int index){
+		/*Creating a temporary head pointer*/
+		Node *tmp = head;
+		
+		for(int ctr = 0; ctr != index; ++ctr){
+			tmp = tmp->Next();
+		}
+		return tmp->Data();
+	}
+
+	int LinkedList::value_form_tail(int index){
+		int converter = size() - index;
+		/*Creating a temporary head pointer*/
+		Node *tmp = head;
+		for(int i = 0; i != converter; ++i){
+			tmp = tmp->Next();
+		}
+		return tmp->Data();
+	}
+
+
 }
 
 int main(){
@@ -163,6 +186,8 @@ int main(){
 	list.insert_front(4);
 	list.insert_into(1, 7);
 	list.print_List();
+	std::cout<<'\n'<<list.value_form_tail(4);
+	std::cout<<'\n'<<list.value_at(1);
 	std::cout<<'\n'<<list.size();//output2.
 	std::cout<<'\n'<<list.isEmpty();
 }

@@ -6,9 +6,9 @@
       - [x] empty() - bool returns true if empty 
       - [ ] front() - get value of front item
       - [ ] back() - get value of end item
-  - [ ] Printing the list:
-      - [ ] value_at(index) - returns the value of the nth item (starting at 0 for first)
-      - [ ] value_n_from_end(n) - returns the value of the node at nth position from the end of the list
+  - [x] Printing the list:
+      - [x] value_at(index) - returns the value of the nth item (starting at 0 for first)
+      - [x] value_n_from_end(n) - returns the value of the node at nth position from the end of the list
       - [x] Whole list
   - [x] Inserting:
       - [x] push_front(value) - adds an item to the front of the list
