@@ -1,11 +1,11 @@
 # Will be edited
 
 - Week 1 Linked Lists:
-  - [ ] Creating a link list:
+  - [x] Creating a link list:
       - [x] size() - returns number of data elements in list
       - [x] empty() - bool returns true if empty 
-      - [ ] front() - get value of front item
-      - [ ] back() - get value of end item
+      - [x] front() - get value of front item
+      - [x] back() - get value of end item
   - [x] Printing the list:
       - [x] value_at(index) - returns the value of the nth item (starting at 0 for first)
       - [x] value_n_from_end(n) - returns the value of the node at nth position from the end of the list

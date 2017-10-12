@@ -37,6 +37,9 @@ namespace std{
 		void insert_into(int location, int data);
 		int value_at(int index);
 		int value_form_tail(int index);
+		int get_value_from_front();
+		int get_value_from_back();
+		int pop_front();
 	};
 
 	void LinkedList::print_List(){
@@ -173,6 +176,15 @@ namespace std{
 		return tmp->Data();
 	}
 
+	int LinkedList::get_value_from_front(){ return head->Data(); }
+
+	int LinkedList::get_value_from_back(){
+		Node *tmp = head;
+		while(tmp->Next() != NULL){
+			tmp = tmp->Next();
+		}
+		return tmp->Data();
+	}
 
 }
 
@@ -190,4 +202,6 @@ int main(){
 	std::cout<<'\n'<<list.value_at(1);
 	std::cout<<'\n'<<list.size();//output2.
 	std::cout<<'\n'<<list.isEmpty();
+	std::cout<<'\n'<<list.get_value_from_front();
+	std::cout<<'\n'<<list.get_value_from_back();
 }
