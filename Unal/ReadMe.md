@@ -7,3 +7,4 @@
     - Insertion.
     - Size check.
     - Item search.
+    - Item remove.
