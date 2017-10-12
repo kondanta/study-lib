@@ -41,6 +41,20 @@ class linkedList(object):
             count += 1
             current = current.get_next()
         return count
+
+    # Search an item on the list // O(n) in worst case
+    def search(self, data):
+        current = self.head
+        found = False
+        while current and found is False:
+            if current.get_data() == data:
+                found = True
+            else:
+                current = current.get_next()
+        if current is None:
+            #raise ValueError("Data is not in the list")
+            return "Item was not found."
+        return "Item exists."
         
     def __repr__(self):
         node = self.head
@@ -57,6 +71,7 @@ ll = linkedList([""]) # Creation of Linked List
 # Insert
 ll.insert("1")
 ll.insert("2")
+ll.insert("2")
 ll.insert("3")
 ll.insert("4")
 print("List:")
@@ -65,3 +80,9 @@ print(ll)
 # Size check
 print("Size:")
 print(ll.size())
+
+# Search
+print("Searching 3:")
+print(ll.search("3"))
+print("Searching 7:")
+print(ll.search("7"))

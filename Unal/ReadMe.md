@@ -6,3 +6,4 @@
     - Creation of linked list.
     - Insertion.
     - Size check.
+    - Item search.
