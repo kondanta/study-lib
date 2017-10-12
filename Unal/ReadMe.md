@@ -4,4 +4,5 @@
 
   - # Python
     - Creation of linked list.
-    - Insertion
+    - Insertion.
+    - Size check.

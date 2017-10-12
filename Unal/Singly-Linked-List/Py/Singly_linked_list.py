@@ -32,6 +32,15 @@ class linkedList(object):
         new_node = Node(data)
         new_node.set_next(self.head)
         self.head = new_node
+
+    # Finds the size of list // O(n)    
+    def size(self):
+        current = self.head
+        count = 0
+        while current:
+            count += 1
+            current = current.get_next()
+        return count
         
     def __repr__(self):
         node = self.head
@@ -50,5 +59,9 @@ ll.insert("1")
 ll.insert("2")
 ll.insert("3")
 ll.insert("4")
-
+print("List:")
 print(ll)
+
+# Size check
+print("Size:")
+print(ll.size())
