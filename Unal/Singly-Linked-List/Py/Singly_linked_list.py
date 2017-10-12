@@ -29,7 +29,7 @@ class linkedList(object):
 
     # Inserting "from start" // O(1)
     def insert(self, data):
-        new_node = Node(data)
+        new_node = Node(data) # Access to storage
         new_node.set_next(self.head)
         self.head = new_node
 
@@ -40,7 +40,7 @@ class linkedList(object):
         while current:
             count += 1
             current = current.get_next()
-        return count
+        return count - 1 # -1 because of self.head = None 
 
     # Search an item on the list // O(n) in worst case
     def search(self, data):
