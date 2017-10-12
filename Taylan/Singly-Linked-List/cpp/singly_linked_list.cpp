@@ -34,6 +34,7 @@ namespace std{
 		void init_list(int data);
 		void print_List();
 		int size();
+		void insert_into(int location, int data);
 	};
 
 	void LinkedList::print_List(){
@@ -125,6 +126,30 @@ namespace std{
 
 	bool LinkedList::isEmpty(){ return (head == NULL) ? true:false;	}
 
+	void LinkedList::insert_into(int location, int data){
+        //Creatin a new node
+        Node *newNode = new Node();
+        newNode->setData(data);
+        newNode->setNext(NULL);
+        /*If we want to put our data in place of the head*/
+        if(location == 0){
+        	newNode->setNext(head);
+        	head = newNode;
+
+        }else{
+	        //Creating temporary pointer.
+	        Node *curr = head;
+	        /*iterating to location*/
+	        for(int ctr = 0; ctr != location; ++ctr){
+	        	if(curr->Next() == NULL){
+	        		break;
+	        	}
+	            curr = curr->Next();
+	        }
+	        newNode->setNext(curr->Next());
+	        curr->setNext(newNode);
+		}
+	}
 
 }
 
@@ -136,6 +161,7 @@ int main(){
 	list.init_list(5);
 	list.insert_Back(6);
 	list.insert_front(4);
+	list.insert_into(1, 7);
 	list.print_List();
 	std::cout<<'\n'<<list.size();//output2.
 	std::cout<<'\n'<<list.isEmpty();
