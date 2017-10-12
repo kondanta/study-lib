@@ -40,6 +40,7 @@ namespace std{
 		int get_value_from_front();
 		int get_value_from_back();
 		int pop_front();
+		int pop_back();
 	};
 
 	void LinkedList::print_List(){
@@ -185,6 +186,31 @@ namespace std{
 		}
 		return tmp->Data();
 	}
+	/*Removes the first node of the list.*/
+	int LinkedList::pop_front(){
+		/*Creating a new node for the removal.*/
+		Node *tmp = head;
+		head = head->Next();
+		delete tmp;
+
+		return head->Data();
+	}
+
+	int LinkedList::pop_back(){
+		/*Creating a new node for the removal.*/
+		Node *curr = head;
+		/*1->2->3->4->null*/
+		while(curr->Next()->Next() != NULL){
+			curr = curr->Next();
+		}
+
+		Node *tmp = curr;
+		delete tmp->Next();
+		tmp->setNext(NULL);/*Last value becomes zero and still showing up in the list.*/
+
+		return tmp->Data();
+	}
+
 
 }
 
@@ -204,4 +230,8 @@ int main(){
 	std::cout<<'\n'<<list.isEmpty();
 	std::cout<<'\n'<<list.get_value_from_front();
 	std::cout<<'\n'<<list.get_value_from_back();
+	//std::cout<<'\n'<<list.pop_front()<<'\n';
+	list.print_List();
+	std::cout<<'\n'<<list.pop_back()<<'\n';
+	list.print_List();
 }

@@ -15,8 +15,8 @@
       - [x] push_back(value) - adds an item at the end
       - [x] insert(index, value) - insert value at index, so current item at that index is pointed to by new item at index
   - [ ] Deletion:
-      - [ ] pop_front() - remove front item and return its value
-      - [ ] pop_back() - removes end item and returns its value
+      - [x] pop_front() - remove front item and return its value
+      - [x] pop_back() - removes end item and returns its value
       - [ ] erase(index) - removes node at given index
       - [ ] remove_value(value) - removes the first item in the list with this value
   - [ ] Reversing the list:
