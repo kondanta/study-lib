@@ -1,42 +1,6 @@
-#include <iostream>
+#include "singly_linked_list.h"
+
 namespace std{
-
-	class Node{
-	private:
-		int _data;
-		Node *_next;
-
-	public:
-		Node(){}
-		// setters and getters
-		void setData(int Data){ _data = Data;}
-		void setNext(Node *Next){ 
-			if(Next == NULL){
-				_next = NULL;
-			}else{
-			_next = Next;
-			}
-		}
-		int Data(){return _data;}
-		Node *Next(){return _next;}
-	};
-
-	class LinkedList{
-	private:
-		Node *head;
-	public:
-		LinkedList(){ head = NULL;}//init
-		/*TODO: Tail will be added. */
-		void insert_Back(int data);//it will append the next value to the
-									//front cell [x] -> [data]
-		void insert_front(int data);
-		bool isEmpty();
-		void init_list(int data);
-		void print_List();
-		int size();
-		void insert_into(int location, int data);
-	};
-
 	void LinkedList::print_List(){
 		//init. the temporary pointer, so that we cannot lose
 		//original head pointer of the list.
@@ -65,7 +29,7 @@ namespace std{
 	}
 
 	/*inserting a value infront of the */
-	void LinkedList::insert_Back(int data){
+	void LinkedList::insert_back(int data){
 		//Creating a node
 		Node *newNode = new Node();
 		//in struct we do it like newNode->data = data;
@@ -151,18 +115,95 @@ namespace std{
 		}
 	}
 
-}
+	int LinkedList::value_at(int index){
+		/*Creating a temporary head pointer*/
+		Node *tmp = head;
+		
+		for(int ctr = 0; ctr != index; ++ctr){
+			tmp = tmp->Next();
+		}
+		return tmp->Data();
+	}
+	/*It returns to the value of given index starting from the tail.*/
+	int LinkedList::from_tail_value_at(int index){
+		int converter = size() - index;
+		/*Creating a temporary head pointer*/
+		Node *tmp = head;
+		for(int i = 0; i != converter; ++i){
+			tmp = tmp->Next();
+		}
+		return tmp->Data();
+	}
 
-int main(){
-	//Creating a list
-	std::LinkedList list;
+	int LinkedList::get_value_from_front(){ return head->Data(); }
 
-	//Initilizing it with 5
-	list.init_list(5);
-	list.insert_Back(6);
-	list.insert_front(4);
-	list.insert_into(1, 7);
-	list.print_List();
-	std::cout<<'\n'<<list.size();//output2.
-	std::cout<<'\n'<<list.isEmpty();
+	int LinkedList::get_value_from_back(){
+		Node *tmp = head;
+		while(tmp->Next() != NULL){
+			tmp = tmp->Next();
+		}
+		return tmp->Data();
+	}
+	/*Removes the first node of the list.*/
+	int LinkedList::pop_front(){
+		/*Creating a new node for the removal.*/
+		Node *tmp = head;
+		head = head->Next();
+		delete tmp;
+
+		return head->Data();
+	}
+
+	int LinkedList::pop_back(){
+		/*Creating a new node for the removal.*/
+		Node *curr = head;
+		/*1->2->3->4->null*/
+		while(curr->Next()->Next() != NULL){
+			curr = curr->Next();
+		}
+
+		Node *tmp = curr;
+		delete tmp->Next();
+		tmp->setNext(NULL);/*Last value becomes zero and still showing up in the list.*/
+
+		return tmp->Data();
+	}
+	void LinkedList::remove_at(int index){
+		Node *tmp = head;
+		/*If index is 0, we're removing the first value.*/
+		if(index == 0){
+			pop_front();
+		}else{
+			/*If index number is bigger than link lists size,
+			if it is, we need to index = position of the last value of list.*/
+			if(size() < index)
+				index = size() - 1; //because our list starts with the index 0
+			
+			for(int ctr = 0; ctr < (index - 1); ++ctr){
+				tmp = tmp->Next();
+			}/*Checking the next and next > next. If null we're removing from tail*/
+			Node *p = tmp->Next()->Next();
+			delete tmp->Next();
+			tmp->setNext(p);
+		}
+	}
+	/*Reversing the linked list and printing the reversed order.*/
+	Node * LinkedList::reverse(){
+		Node *tmp = head;
+		Node *sec = new Node();
+		Node *reverselist = NULL;
+
+		/*Reversing the list*/
+		while(tmp != NULL){
+			sec = tmp->Next();
+			tmp->setNext(reverselist);
+			reverselist = tmp;
+			tmp = sec;
+		}
+		while(reverselist){
+			cout<<reverselist->Data()<<" > ";
+			reverselist = reverselist->Next();
+		}
+		return reverselist;
+	}
 }
