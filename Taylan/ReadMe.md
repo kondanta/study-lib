@@ -17,7 +17,7 @@
   - [ ] Deletion:
       - [x] pop_front() - remove front item and return its value
       - [x] pop_back() - removes end item and returns its value
-      - [ ] erase(index) - removes node at given index
+      - [x] erase(index) - removes node at given index
       - [ ] remove_value(value) - removes the first item in the list with this value
   - [ ] Reversing the list:
       - [ ] reverse() - reverses the list

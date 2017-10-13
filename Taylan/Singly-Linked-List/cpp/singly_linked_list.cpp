@@ -27,7 +27,7 @@ namespace std{
 	public:
 		LinkedList(){ head = NULL;}//init
 		/*TODO: Tail will be added. */
-		void insert_Back(int data);//it will append the next value to the
+		void insert_back(int data);//it will append the next value to the
 									//front cell [x] -> [data]
 		void insert_front(int data);
 		bool isEmpty();
@@ -36,11 +36,12 @@ namespace std{
 		int size();
 		void insert_into(int location, int data);
 		int value_at(int index);
-		int value_form_tail(int index);
+		int from_tail_value_at(int index);
 		int get_value_from_front();
 		int get_value_from_back();
 		int pop_front();
 		int pop_back();
+		void remove_at(int index);
 	};
 
 	void LinkedList::print_List(){
@@ -71,7 +72,7 @@ namespace std{
 	}
 
 	/*inserting a value infront of the */
-	void LinkedList::insert_Back(int data){
+	void LinkedList::insert_back(int data){
 		//Creating a node
 		Node *newNode = new Node();
 		//in struct we do it like newNode->data = data;
@@ -166,8 +167,8 @@ namespace std{
 		}
 		return tmp->Data();
 	}
-
-	int LinkedList::value_form_tail(int index){
+	/*It returns to the value of given index starting from the tail.*/
+	int LinkedList::from_tail_value_at(int index){
 		int converter = size() - index;
 		/*Creating a temporary head pointer*/
 		Node *tmp = head;
@@ -210,28 +211,51 @@ namespace std{
 
 		return tmp->Data();
 	}
+	void LinkedList::remove_at(int index){
+		Node *tmp = head;
+		/*If index is 0, we're removing the first value.*/
+		if(index == 0){
+			pop_front();
+		}else{
+			/*If index number is bigger than link lists size,
+			if it is, we need to index = position of the last value of list.*/
+			if(size() < index)
+				index = size() - 1; //because our list starts with the index 0
+			
+			for(int ctr = 0; ctr < (index - 1); ++ctr){
+				tmp = tmp->Next();
+			}/*Checking the next and next > next. If null we're removing from tail*/
+			Node *p = tmp->Next()->Next();
+			delete tmp->Next();
+			tmp->setNext(p);
+			
 
+		}
+
+	}
 
 }
 
 int main(){
 	//Creating a list
 	std::LinkedList list;
-
+	/*Since this part for the testing changes do not matter.*/
 	//Initilizing it with 5
 	list.init_list(5);
-	list.insert_Back(6);
+	list.insert_back(6);
 	list.insert_front(4);
 	list.insert_into(1, 7);
 	list.print_List();
-	std::cout<<'\n'<<list.value_form_tail(4);
-	std::cout<<'\n'<<list.value_at(1);
-	std::cout<<'\n'<<list.size();//output2.
-	std::cout<<'\n'<<list.isEmpty();
-	std::cout<<'\n'<<list.get_value_from_front();
-	std::cout<<'\n'<<list.get_value_from_back();
-	//std::cout<<'\n'<<list.pop_front()<<'\n';
-	list.print_List();
-	std::cout<<'\n'<<list.pop_back()<<'\n';
+	// std::cout<<'\n'<<list.from_tail_value_at(4);
+	// std::cout<<'\n'<<list.value_at(1);
+	// std::cout<<'\n'<<list.size();//output2.
+	// std::cout<<'\n'<<list.isEmpty();
+	// std::cout<<'\n'<<list.get_value_from_front();
+	// std::cout<<'\n'<<list.get_value_from_back();
+	// std::cout<<'\n'<<list.pop_front()<<'\n';
+	// list.print_List();
+	// std::cout<<'\n'<<list.pop_back()<<'\n';
+	std::cout<<'\n';
+	list.remove_at(7);
 	list.print_List();
 }
