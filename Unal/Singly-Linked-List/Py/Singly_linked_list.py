@@ -72,7 +72,22 @@ class linkedList(object):
             self.head = current.get_next()
         else:
             previous.set_next(current.get_next())
-
+    
+    # Find the given number of item in the list
+    def ssearch(self, number):
+        counter = 1; # Because of head
+        current = self.head
+        if number == 0: # 0 case
+            print("Bad number")
+            return
+        while counter < number:
+            current = current.get_next()
+            counter += 1
+        if current.get_next() is None: # The case of not having the given item number
+            print("No such item number. Please use size to see how many items in the list.")
+        else:
+            print(current)
+    
     def __repr__(self):
         node = self.head
         data = []
@@ -115,3 +130,7 @@ ll.remove("2")
 print(ll)
 print("Removing 9...")
 ll.remove("9")
+
+#Spec. Search
+print("Searching 3rd item...")
+ll.ssearch(3)
