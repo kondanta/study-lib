@@ -14,14 +14,14 @@
       - [x] push_front(value) - adds an item to the front of the list
       - [x] push_back(value) - adds an item at the end
       - [x] insert(index, value) - insert value at index, so current item at that index is pointed to by new item at index
-  - [ ] Deletion:
+  - [x] Deletion:
       - [x] pop_front() - remove front item and return its value
       - [x] pop_back() - removes end item and returns its value
       - [x] erase(index) - removes node at given index
-      - [ ] remove_value(value) - removes the first item in the list with this value
-  - [ ] Reversing the list:
-      - [ ] reverse() - reverses the list
-      - [ ] Printing the reversed list
+      - ~~[ ] remove_value(value) - removes the first item in the list with this value~~
+  - [x] Reversing the list:
+      - [x] reverse() - reverses the list
+      - [x] Printing the reversed list
   - [ ] Merge 2 lists
   - ~~[ ] Doubly-linked List:~~
     - ~~up to the author~~
