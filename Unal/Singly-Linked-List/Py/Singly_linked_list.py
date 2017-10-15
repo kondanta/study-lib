@@ -72,7 +72,39 @@ class linkedList(object):
             self.head = current.get_next()
         else:
             previous.set_next(current.get_next())
+    
+    # Find the given number of item in the list
+    def ssearch(self, number):
+        counter = 1 # Because of head
+        current = self.head
+        if number == 0: # 0 case
+            print("Bad number")
+            return
+        while counter < number:
+            current = current.get_next()
+            counter += 1
+        if current.get_next() is None: # The case of not having the given item number
+            print("No such item number. Please use size to see how many items in the list.")
+        else:
+            print(current)
 
+    # Remove the "xth" item in the list
+    def sremove(self,number):
+        counter = 1
+        previous = None
+        current = self.head
+        if number == 0: 
+            print("Bad number")
+            return
+        while counter < number:
+            previous = current
+            current = current.get_next()
+            counter += 1
+        if current.get_next() is None: # The case of not having the given item number
+            print("No such item number. Please use size to see how many items in the list.")
+        else:
+            previous.set_next(current.get_next())
+    
     def __repr__(self):
         node = self.head
         data = []
@@ -115,3 +147,16 @@ ll.remove("2")
 print(ll)
 print("Removing 9...")
 ll.remove("9")
+
+#Spec. Search
+print("Searching 3rd item...")
+ll.ssearch(3)
+
+#Spec. Search
+print("Adding 10 and 9...")
+ll.insert("10")
+ll.insert("9")
+print(ll) # 9 10 4 2 1
+print("Removing 2nd item...")
+ll.sremove(2)
+print(ll) # 9 4 2 1

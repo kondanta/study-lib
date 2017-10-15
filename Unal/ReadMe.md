@@ -8,3 +8,6 @@
     - Size check.
     - Item search.
     - Item remove.
+    - Specific search.
+    - Specific remove.
+  - # Javascript
