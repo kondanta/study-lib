@@ -39,7 +39,7 @@ class DoublyLinkedList{
 		}
 		
 		// NewNode become last element.
-		if(index == size + 1){
+		if(index == size){
 			newNode.prev = tail;
 			tail.next = newNode;
 			tail = newNode; // tracking the tail value.
@@ -57,14 +57,41 @@ class DoublyLinkedList{
 		size++;
 	}
 
-		public void printList() {
+	public void printList() {
 		Node curr = head;
 
 		while (curr != null) {
 			System.out.print(curr.data + " > ");
 			curr = curr.next;
 		}
+
+		System.out.print("None");
 	}
+
+	public void deletion(int index){
+		//checking the list's inside if there's a value.
+		if(size == 0){
+			return;
+		}
+
+		if(index > size){
+			index = size;
+		}
+
+		Node curr = head;
+		for(int ctr = 0; ctr != index; ctr++){
+			curr = curr.next;
+		}
+
+		// [Node] > [Deleted Node] > [Node]
+		// [Node] > [Node] however [deleted node] > [Node]
+		curr.prev.next = curr.next;
+		// [Node] > [Node]
+		curr.next.prev = curr.prev;
+
+		size--;
+	}
+
 
 
 }
@@ -73,9 +100,15 @@ class dll{
 	public static void main(String[] args) {
 		DoublyLinkedList list = new DoublyLinkedList();
 
-		int data = 5;
-		int index = 2;
-		list.insertion(5, 2);
+		list.insertion(1, 0);
+		list.insertion(2,1);
+		list.insertion(3, 2);
+		list.insertion(4, 3);
+		list.insertion(5, 4);
+		list.insertion(6, 5);
+		list.printList();
+
+		list.deletion(2);
 		list.printList();
 	}
 }
