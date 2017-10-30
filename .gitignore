@@ -1,5 +1,6 @@
 *.exe
 __pychache__/
+*.class
 
 .vscode
 
