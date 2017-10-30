@@ -10,4 +10,9 @@
     - Item remove.
     - Specific search.
     - Specific remove.
-  - # Javascript
+
+- # Week 2 DES like encryption project.
+
+  - # Python
+    - Encryption
+    - Decryption
