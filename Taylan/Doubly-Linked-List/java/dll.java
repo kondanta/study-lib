@@ -55,7 +55,15 @@ class DoublyLinkedList{
 		curr.prev.next = newNode; // ,__, doubly linked list is killing me.....
 		curr.prev = newNode;
 		size++;
+	}
 
+		public void printList() {
+		Node curr = head;
+
+		while (curr != null) {
+			System.out.print(curr.data + " > ");
+			curr = curr.next;
+		}
 	}
 
 
@@ -68,5 +76,6 @@ class dll{
 		int data = 5;
 		int index = 2;
 		list.insertion(5, 2);
+		list.printList();
 	}
 }
