@@ -48,6 +48,6 @@ in this repository.*
     - [ ] SYN Flood - will launch SYN-flood attack to a given destination (IP) and port(s). This tool must also enable you to choose the number of flooding.
     - [ ] Sniff - Will sniff a network and display the network traffic on the screen.
   - Dubly Linked List:
-    - [ ] Inserting
-    - [ ] Printing
-    - [ ] Deletion
+    - [x] Inserting
+    - [x] Printing
+    - [x] Deletion
