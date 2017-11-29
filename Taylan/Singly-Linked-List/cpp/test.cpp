@@ -1,9 +1,9 @@
-#include "singly_linked_list.h"
+#include "singly_linked_list.hpp"
 /*Unit tests will be added here.*/
-
+using namespace LinkList; 
 int main(){
 	//Creating a list
-	std::LinkedList list;
+	LinkedList list;
 	/*Since this part for the testing changes do not matter.*/
 	//Initilizing it with 5
 	list.init_list(5);
