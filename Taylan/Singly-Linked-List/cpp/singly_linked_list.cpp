@@ -1,6 +1,6 @@
-#include "singly_linked_list.h"
+#include "singly_linked_list.hpp"
 
-namespace std{
+namespace LinkList{
 	void LinkedList::print_List(){
 		//init. the temporary pointer, so that we cannot lose
 		//original head pointer of the list.
@@ -8,25 +8,26 @@ namespace std{
 
 		//Checking the list if there is a node or not.
 		if(tmp == NULL){//TODO: isEmpty()
-			cout << "List is empty\n";
+			std::cout << "List is empty\n";
 			return;
 		}
 
 		//Checking only one node situation.
 		if(tmp->Next() == NULL){
-			cout << "Starting: " <<tmp->Data()
+			std::cout << "Starting: " <<tmp->Data()
 				 <<"Next Value > NULL\n";
 		}else{
 			/*we need to do traversal until the last node.
 			and since after last node there won't be any value
 			it'll be null.*/
 			while(tmp!=NULL){
-				cout << tmp->Data() << " > ";
+				std::cout << tmp->Data() << " > ";
 				//incrementing the pointer;
 				tmp = tmp->Next();
 			}
 		}
 	}
+
 
 	/*inserting a value infront of the */
 	void LinkedList::insert_back(int data){
@@ -51,6 +52,8 @@ namespace std{
 			head = newNode;
 		}
 	}
+
+
 	/*Inserting a value in front of the head node.*/
 	void LinkedList::insert_front(int data){
 		// creating a new node.
@@ -63,6 +66,8 @@ namespace std{
 		 newNode->setNext(head);
 		 head = newNode;
 	}
+
+
 	/*Initializing the list with a value.*/
 	void LinkedList::init_list(int data){
 		//creating a node
@@ -75,6 +80,8 @@ namespace std{
 		}
 		head = newNode;
 	}
+
+
 	/*It returns to Linked Lists size.*/
 	int LinkedList::size(){
 		//counter variable
@@ -87,8 +94,6 @@ namespace std{
 		}
 		return ctr;
 	}
-
-	bool LinkedList::isEmpty(){ return (head == NULL) ? true:false;	}
 
 	void LinkedList::insert_into(int location, int data){
         //Creatin a new node
@@ -115,6 +120,7 @@ namespace std{
 		}
 	}
 
+
 	int LinkedList::value_at(int index){
 		/*Creating a temporary head pointer*/
 		Node *tmp = head;
@@ -124,6 +130,8 @@ namespace std{
 		}
 		return tmp->Data();
 	}
+
+
 	/*It returns to the value of given index starting from the tail.*/
 	int LinkedList::from_tail_value_at(int index){
 		int converter = size() - index;
@@ -135,7 +143,9 @@ namespace std{
 		return tmp->Data();
 	}
 
+
 	int LinkedList::get_value_from_front(){ return head->Data(); }
+
 
 	int LinkedList::get_value_from_back(){
 		Node *tmp = head;
@@ -144,6 +154,8 @@ namespace std{
 		}
 		return tmp->Data();
 	}
+
+
 	/*Removes the first node of the list.*/
 	int LinkedList::pop_front(){
 		/*Creating a new node for the removal.*/
@@ -153,6 +165,7 @@ namespace std{
 
 		return head->Data();
 	}
+
 
 	int LinkedList::pop_back(){
 		/*Creating a new node for the removal.*/
@@ -168,6 +181,8 @@ namespace std{
 
 		return tmp->Data();
 	}
+
+
 	void LinkedList::remove_at(int index){
 		Node *tmp = head;
 		/*If index is 0, we're removing the first value.*/
@@ -201,7 +216,7 @@ namespace std{
 			tmp = sec;
 		}
 		while(reverselist){
-			cout<<reverselist->Data()<<" > ";
+			std::cout<<reverselist->Data()<<" > ";
 			reverselist = reverselist->Next();
 		}
 		return reverselist;
