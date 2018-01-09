@@ -32,10 +32,19 @@ void Stack::Push(int value) {
   SetTop(topv++);
 }
 
+int Stack::Pop() {
+  int topv = GetTop();
+  int poppedValue = arr[topv--];
+  SetTop(topv--);
+  cout << "Popped value: " << poppedValue;
+  return poppedValue;
+}
+
 int main() {
   Stack obj;
   obj.Push(5);
   obj.Push(10);
+  obj.Pop();
   for (int i = 0; i < 10; i++) {
     cout << obj.arr[i] << " ";
   }
