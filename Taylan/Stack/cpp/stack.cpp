@@ -15,6 +15,7 @@ public:
   int Pop();
   bool isEmpty();
 
+  int arr[10] = {0}; // max 10
 private:
   int topValue{-1};
 };
@@ -23,10 +24,20 @@ void Stack::SetTop(int x) { topValue = move(x); }
 
 int Stack::GetTop() { return topValue; }
 
+void Stack::Push(int value) {
+  // TODO Max check
+  int topv = GetTop();
+  arr[++topv] =
+      value; //++arg bc we need to increment first since init value is -1
+  SetTop(topv++);
+}
+
 int main() {
   Stack obj;
-  cout << obj.GetTop(); // Exp. Out -> -1
-  obj.SetTop(5);
-  cout << obj.GetTop(); // Exp. Out -> 5;
+  obj.Push(5);
+  obj.Push(10);
+  for (int i = 0; i < 10; i++) {
+    cout << obj.arr[i] << " ";
+  }
   return 0;
 }
