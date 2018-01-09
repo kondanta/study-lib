@@ -38,16 +38,31 @@ in this repository.*
 
 - Week 3 `School Work` + Doubly Linked List:
   - School Work:
-    - [ ] ICMP Ping - Ping an IP range and collect IP addresses of the hosts that are alive
-    - [ ] Port Identification - Get the IP addresses scan and validate these IP addresses. If an IP address is a valid live host address append it to a string (live hosts) that contains the network of the live hosts
-    - [ ] Open Port Identification - Get the IP addresses scan and check and validate these IP addresses. The scanning must find open ports from each host and save the results into a text file.
-    - [ ] OS Fingerprint Identification - identify operating systems (OS) and OS versions of the hosts with open ports.
-    - [ ] Router & Firewall Detection - Scan and find neighbor router and firewall addresses, protocols, and ports of each router. 
-    - [ ] Web Server Detection - Scan and find 10 web-server addresses, protocols, and ports of each web server.
-    - [ ] SNMP Detection - Scan and find neighbor hosts addresses having the SNMP-protocols, and ports of each host. 
-    - [ ] SYN Flood - will launch SYN-flood attack to a given destination (IP) and port(s). This tool must also enable you to choose the number of flooding.
-    - [ ] Sniff - Will sniff a network and display the network traffic on the screen.
+    - [x] ICMP Ping - Ping an IP range and collect IP addresses of the hosts that are alive
+    - [x] Port Identification - Get the IP addresses scan and validate these IP addresses.
+    If an IP address is a valid live host address append it to a string (live hosts) that contains
+    the network of the live hosts
+    - [x] Open Port Identification - Get the IP addresses scan and check and validate these IP addresses.
+    The scanning must find open ports from each host and save the results into a text file.
+    - [x] OS Fingerprint Identification - identify operating systems (OS) and OS versions of the
+    hosts with open ports.
+    - [x] Router & Firewall Detection - Scan and find neighbor router and firewall addresses,
+    protocols, and ports of each router.
+    - [x] Web Server Detection - Scan and find 10 web-server addresses, protocols,
+    and ports of each web server.
+    - [x] SNMP Detection - Scan and find neighbor hosts addresses having the SNMP-protocols,
+    and ports of each host.
+    - [x] SYN Flood - will launch SYN-flood attack to a given destination (IP) and port(s).
+    This tool must also enable you to choose the number of flooding.
+    - [x] Sniff - Will sniff a network and display the network traffic on the screen.
   - Dubly Linked List:
     - [x] Inserting
     - [x] Printing
     - [x] Deletion
+
+- Week 4 `Stack`:
+  *I had rough school term, so week orders become a mess. But I'll continue with the order*
+  - [x] Pop
+  - [x] Push
+  - [x] isEmpty
+  ...
