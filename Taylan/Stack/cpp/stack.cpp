@@ -40,10 +40,16 @@ int Stack::Pop() {
   return poppedValue;
 }
 
+bool Stack::isEmpty() { return GetTop() < 0; }
+
 int main() {
   Stack obj;
+  if (obj.isEmpty()) {
+    cout << "Stack empty!";
+  }
   obj.Push(5);
   obj.Push(10);
+  cout << obj.isEmpty();
   obj.Pop();
   for (int i = 0; i < 10; i++) {
     cout << obj.arr[i] << " ";
