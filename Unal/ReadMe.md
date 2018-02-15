@@ -9,3 +9,7 @@
 - # Network and Cryptography
 
   - DES-like Cryptography Project
+
+- # Design Patterns
+
+  - Open Closed Principle
