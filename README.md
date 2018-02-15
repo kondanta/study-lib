@@ -1,3 +1,1 @@
-# DSA-Implementation
-
-Study lib
+# Study library
