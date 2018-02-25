@@ -1,18 +1,15 @@
-# DSA Weekly List
+# Personal Study Folder
 
-- # Week 1 Singly Linked Lists:
+- # Data Structures and Algorithms
 
-  - # Python
-    - Creation of linked list.
-    - Insertion.
-    - Size check.
-    - Item search.
-    - Item remove.
-    - Specific search.
-    - Specific remove.
+  - # Singly linked list
+    - Python
 
-- # Week 2 DES like encryption project.
 
-  - # Python
-    - Encryption
-    - Decryption
+- # Network and Cryptography
+
+  - DES-like Cryptography Project
+
+- # Design Patterns
+
+  - Open Closed Principle

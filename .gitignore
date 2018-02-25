@@ -3,6 +3,8 @@ __pychache__/
 *.class
 
 .vscode
+.idea
+cmake-build-debug
 
 # cpp
 
