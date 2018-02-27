@@ -34,37 +34,26 @@ using namespace std;
 
 class Item {
 public:
-  explicit Item(string name) : _name(std::move(std::move(name))){};
+  explicit Item(string name, int type, double price)
+      : _name(move(move(name))), _type(move(type)), _price(price){};
   string getName() { return _name; }
-  int getType() { return this->type; }
-
-protected:
-  int type{};
+  int getType() { return this->_type; }
+  double getPrice() { return this->_price; }
 
 private:
   string _name;
+  int _type;
+  double _price;
 };
 
 class Food : public Item {
 public:
-  Food(string name, int price) : Item(std::move(name)), _price(price) {
-    type = 1;
-  }
-  int getPrice() { return _price; }
-
-private:
-  int _price;
+  Food(string name, double price) : Item(move(name), move(1), move(price)) {}
 };
 
 class Book : public Item {
 public:
-  Book(string name, int price) : Item(std::move(name)), _price(price) {
-    type = 2;
-  }
-  int getPrice() { return this->_price; }
-
-private:
-  int _price;
+  Book(string name, double price) : Item(move(name), move(2), move(price)) {}
 };
 
 //
@@ -138,6 +127,10 @@ public:
   virtual void add(Item *) = 0;     // Not needed for iteration.
   virtual int getCount() const = 0; // Needed for iteration.
   virtual Item *get(int) const = 0; // Needed for iteration.
+  virtual void
+  emptyVector() = 0; // Needed for fixing memory leak after removing
+                     // aggregate object in main.
+
 protected:
   AbstractAggregate() = default;
   ;
@@ -160,6 +153,13 @@ public:
   int getCount() const override { return _items.size(); }
   void add(Item *item) override { _items.push_back(item); };
   Item *get(int index) const override { return _items[index]; };
+  // clears the collection
+  void emptyVector() override {
+    for (Item *it : _items) {
+      delete it;
+    }
+    _items.clear();
+  }
 };
 
 #endif // __LAB_2_H

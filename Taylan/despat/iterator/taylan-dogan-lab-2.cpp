@@ -10,10 +10,21 @@ using namespace std;
 // Iterator Logic implementations
 FoodIterator::FoodIterator(const Collection *collection)
     : _collection(collection), _current(0){};
-void FoodIterator::First() { _current = 0; }
-void FoodIterator::Next() { _current++; }
+void FoodIterator::First() {
+  _current = 0;
+  while (!IsDone() && _collection->get(_current)->getType() != 1)
+    _current++;
+}
+void FoodIterator::Next() {
+  _current++;
+  while (!IsDone() && _collection->get(_current)->getType() != 1)
+    _current++;
+}
 bool FoodIterator::IsDone() const {
-  return _current >= _collection->getCount();
+  int _num = _collection->getCount();
+  while (_num >= 0 && _collection->get(_num - 1)->getType() != 1)
+    _num--;
+  return _current >= _num;
 }
 Item *FoodIterator::CurrentItem() const {
   return (IsDone() ? nullptr : _collection->get(_current));
@@ -41,23 +52,10 @@ void printAggregate(AbstractIterator &i) {
 }
 int main() {
 
-  Item *food = new Food("Burger", 5);
-  Book *book = new Book("Book", 2);
-
   AbstractAggregate *aggregate = new Collection();
-  aggregate->add(food);
-  aggregate->add(book);
-  /*   aggregate->add(new Food("Burger", 5));
-   *   aggregate->add(new Item("Item 0"));
-   *   aggregate->add(new Item("Item 1"));
-   *   aggregate->add(new Item("Item 2"));
-   *   aggregate->add(new Item("Item 3"));
-   *   aggregate->add(new Item("Item 4"));
-   *   aggregate->add(new Item("Item 5"));
-   *   aggregate->add(new Item("Item 6"));
-   *   aggregate->add(new Item("Item 7"));
-   *   aggregate->add(new Item("Item 8"));
-   *  */
+  aggregate->add(new Food("Burger", 5.50));
+  aggregate->add(new Food("Chips", 10.2));
+  aggregate->add(new Book("Concepts of X", 135.25));
   // Create Iterator
   AbstractIterator *iterator = aggregate->CreateIterator(1);
 
@@ -65,8 +63,7 @@ int main() {
   printAggregate(*iterator);
   // freeing the heap
   delete iterator;
-  delete food;
-  delete book;
+  aggregate->emptyVector();
   delete aggregate;
 
   return 0;
