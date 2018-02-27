@@ -89,16 +89,16 @@ int main() {
   aggregate->add(new Food("Burger", 5, 10));
   aggregate->add(new Food("Chips", 10, 10));
   aggregate->add(new Book("Concepts of X", 135.25, 100));
+  aggregate->add(new Book("Concepts of Y", 135.25, 0));
   // Create Iterator
-  AbstractIterator *iterator = aggregate->CreateIterator(1);
-
+  AbstractIterator *it = aggregate->CreateIterator(1);
+  AbstractIterator *nI = aggregate->CreateIterator(2);
   // Traverse the Aggregate.
-  printAggregate(*iterator);
-  iterator = aggregate->CreateIterator(2);
-
-  printAggregate(*iterator);
+  printAggregate(*it);
+  printAggregate(*nI);
   // freeing the heap
-  delete iterator;
+  delete it;
+  delete nI;
   aggregate->emptyVector();
   delete aggregate;
 
