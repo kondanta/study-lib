@@ -22,12 +22,12 @@
 *Its a list, not an ordered list.*
 
 - Design Patterns:
-  - [  ] Composite Pattern
+  - [ ] Composite Pattern
 - Data Structures and Algorithms:
-  - [  ] Trees, Tries & Graph
-  - [  ] Stack *from scratch* & Queue
-  - [  ] Heaps
-  - [  ] Hash Tables
-  - [  ] Depth & Breadth First Searches
-  - [  ] Binary Search
-  - [  ] Merge and Quick Sorts
+  - [ ] Trees, Tries & Graph
+  - [ ] Stack *from scratch* & Queue
+  - [ ] Heaps
+  - [ ] Hash Tables
+  - [ ] Depth & Breadth First Searches
+  - [ ] Binary Search
+  - [ ] Merge and Quick Sorts
