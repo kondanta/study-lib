@@ -20,10 +20,11 @@
 //		implements the Iterator creation interface to return an instance
 // of the proper ConcreteIterator
 //
-#ifndef LAB2_H_
-#define LAB2_H_
+#ifndef __LAB_2_HPP
+#define __LAB_2_HPP
 #include <iostream>
 #include <string>
+#include <utility>
 #include <vector>
 using namespace std;
 
@@ -33,12 +34,12 @@ using namespace std;
 
 class Item {
 public:
-  Item(string name) : _name(name){};
+  explicit Item(string name) : _name(std::move(std::move(name))){};
   string getName() { return _name; }
   int getType() { return this->type; }
 
 protected:
-  int type;
+  int type{};
 
 private:
   string _name;
@@ -46,8 +47,21 @@ private:
 
 class Food : public Item {
 public:
-  Food(string name, int price) : Item(name), _price(price) { type = 1; }
+  Food(string name, int price) : Item(std::move(name)), _price(price) {
+    type = 1;
+  }
   int getPrice() { return _price; }
+
+private:
+  int _price;
+};
+
+class Book : public Item {
+public:
+  Book(string name, int price) : Item(std::move(name)), _price(price) {
+    type = 2;
+  }
+  int getPrice() { return this->_price; }
 
 private:
   int _price;
@@ -69,7 +83,8 @@ public:
   virtual Item *CurrentItem() const = 0;
 
 protected:
-  AbstractIterator(){};
+  AbstractIterator() = default;
+  ;
 };
 
 // Forward Declaration of Collection
@@ -83,17 +98,16 @@ class Collection;
  * */
 class FoodIterator : public AbstractIterator {
 public:
-  FoodIterator(const Collection *collection);
-  void First();
-  void Next();
-  bool IsDone() const;
-  Item *CurrentItem() const;
+  explicit FoodIterator(const Collection *collection);
+  void First() override;
+  void Next() override;
+  bool IsDone() const override;
+  Item *CurrentItem() const override;
 
 private:
   const Collection *_collection;
   int _current;
 };
-
 //
 // This is the "concrete" Iterator for collection.
 //		CollectionIterator
@@ -101,11 +115,11 @@ private:
 
 class CollectionIterator : public AbstractIterator {
 public:
-  CollectionIterator(const Collection *collection);
-  void First();
-  void Next();
-  Item *CurrentItem() const;
-  bool IsDone() const;
+  explicit CollectionIterator(const Collection *collection);
+  void First() override;
+  void Next() override;
+  Item *CurrentItem() const override;
+  bool IsDone() const override;
 
 private:
   const Collection *_collection;
@@ -125,9 +139,9 @@ public:
   virtual int getCount() const = 0; // Needed for iteration.
   virtual Item *get(int) const = 0; // Needed for iteration.
 protected:
-  AbstractAggregate(){};
+  AbstractAggregate() = default;
+  ;
 };
-class FoodIterator;
 //
 // This is the concrete Aggregate.
 //			Collection
@@ -137,15 +151,15 @@ private:
   vector<Item *> _items;
 
 public:
-  AbstractIterator *CreateIterator(int type) {
+  AbstractIterator *CreateIterator(int type) override {
     if (type == 1) {
       return new FoodIterator(this);
     }
     return new CollectionIterator(this);
   }
-  int getCount() const { return _items.size(); }
-  void add(Item *item) { _items.push_back(item); };
-  Item *get(int index) const { return _items[index]; };
+  int getCount() const override { return _items.size(); }
+  void add(Item *item) override { _items.push_back(item); };
+  Item *get(int index) const override { return _items[index]; };
 };
 
-#endif /* ITERATOR_H_ */
+#endif // __LAB_2_H

@@ -16,7 +16,7 @@ bool FoodIterator::IsDone() const {
   return _current >= _collection->getCount();
 }
 Item *FoodIterator::CurrentItem() const {
-  return (IsDone() ? NULL : _collection->get(_current));
+  return (IsDone() ? nullptr : _collection->get(_current));
 }
 
 CollectionIterator::CollectionIterator(const Collection *collection)
@@ -24,7 +24,7 @@ CollectionIterator::CollectionIterator(const Collection *collection)
 void CollectionIterator::First() { _current = 0; }
 void CollectionIterator::Next() { _current++; }
 Item *CollectionIterator::CurrentItem() const {
-  return (IsDone() ? NULL : _collection->get(_current));
+  return (IsDone() ? nullptr : _collection->get(_current));
 }
 bool CollectionIterator::IsDone() const {
   return _current >= _collection->getCount();
@@ -32,6 +32,7 @@ bool CollectionIterator::IsDone() const {
 
 // Printer Function
 void printAggregate(AbstractIterator &i) {
+  cout << typeid(i).name() << endl;
   cout << "Iterating over collection:" << endl;
   for (i.First(); !i.IsDone(); i.Next()) {
     cout << i.CurrentItem()->getName() << endl;
@@ -40,12 +41,12 @@ void printAggregate(AbstractIterator &i) {
 }
 int main() {
 
-  Item *food = new Food("burger", 5);
-  Item *item = new Item("Test");
+  Item *food = new Food("Burger", 5);
+  Book *book = new Book("Book", 2);
 
   AbstractAggregate *aggregate = new Collection();
   aggregate->add(food);
-  aggregate->add(item);
+  aggregate->add(book);
   /*   aggregate->add(new Food("Burger", 5));
    *   aggregate->add(new Item("Item 0"));
    *   aggregate->add(new Item("Item 1"));
@@ -59,14 +60,13 @@ int main() {
    *  */
   // Create Iterator
   AbstractIterator *iterator = aggregate->CreateIterator(1);
-  cout << typeid(aggregate).name() << endl;
 
   // Traverse the Aggregate.
   printAggregate(*iterator);
   // freeing the heap
   delete iterator;
   delete food;
-  delete item;
+  delete book;
   delete aggregate;
 
   return 0;
