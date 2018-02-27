@@ -32,15 +32,32 @@ using namespace std;
 // Our concrete collection consists of Items.
 //
 
-class Item {
+class Tax {
 public:
-  explicit Item(string name, int type, double price)
-      : _name(move(move(name))), _type(move(type)), _price(price){};
-  string getName() { return _name; }
-  int getType() { return this->_type; }
-  double getPrice() { return this->_price; }
+  void setRatio(double r) { this->_ratio = r; }
+
+  double getRatio() { return this->_ratio; }
+
+  double getPrice(double price) { return price * ((_ratio / 100) + 1); }
 
 private:
+  double _ratio;
+};
+
+class Item {
+public:
+  explicit Item(string name, int type, double price, double taxRatio)
+      : _name(move(move(name))), _type(move(type)), _price(price) {
+    this->tax.setRatio(taxRatio);
+  };
+  string getName() { return _name; }
+  int getType() { return this->_type; }
+  double getSolePrice() { return this->_price; }
+  void setRatio(double r) { this->tax.setRatio(r); }
+  double getPrice() { return tax.getPrice(_price); }
+
+private:
+  Tax tax;
   string _name;
   int _type;
   double _price;
@@ -48,12 +65,14 @@ private:
 
 class Food : public Item {
 public:
-  Food(string name, double price) : Item(move(name), move(1), move(price)) {}
+  Food(string name, double price, double taxRatio)
+      : Item(move(name), move(1), move(price), taxRatio) {}
 };
 
 class Book : public Item {
 public:
-  Book(string name, double price) : Item(move(name), move(2), move(price)) {}
+  Book(string name, double price, double taxRatio)
+      : Item(move(name), move(2), move(price), taxRatio) {}
 };
 
 //
@@ -88,6 +107,19 @@ class Collection;
 class FoodIterator : public AbstractIterator {
 public:
   explicit FoodIterator(const Collection *collection);
+  void First() override;
+  void Next() override;
+  bool IsDone() const override;
+  Item *CurrentItem() const override;
+
+private:
+  const Collection *_collection;
+  int _current;
+};
+
+class BookIterator : public AbstractIterator {
+public:
+  explicit BookIterator(const Collection *collection);
   void First() override;
   void Next() override;
   bool IsDone() const override;
@@ -147,6 +179,8 @@ public:
   AbstractIterator *CreateIterator(int type) override {
     if (type == 1) {
       return new FoodIterator(this);
+    } else if (type == 2) {
+      return new BookIterator(this);
     }
     return new CollectionIterator(this);
   }
