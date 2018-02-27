@@ -56,7 +56,7 @@ private:
 class Item {
 public:
   explicit Item(string name, int type, double price, double taxRatio)
-      : _name(move(move(name))), _type(move(type)), _price(price) {
+      : _name(move(move(name))), _type(type), _price(price) {
     this->tax.setRatio(taxRatio);
   };
   string getName() { return _name; }
@@ -66,7 +66,7 @@ public:
   double getPrice() { return tax.getPrice(_price); }
 
 private:
-  Tax tax;
+  Tax tax{};
   string _name;
   int _type;
   double _price;
@@ -75,13 +75,13 @@ private:
 class Food : public Item {
 public:
   Food(string name, double price, double taxRatio)
-      : Item(move(name), move(1), move(price), taxRatio) {}
+      : Item(move(name), 1, price, taxRatio) {}
 };
 
 class Book : public Item {
 public:
   Book(string name, double price, double taxRatio)
-      : Item(move(name), move(2), move(price), taxRatio) {}
+      : Item(move(name), 2, price, taxRatio) {}
 };
 
 //
@@ -188,7 +188,8 @@ public:
   AbstractIterator *CreateIterator(int type) override {
     if (type == 1) {
       return new FoodIterator(this);
-    } else if (type == 2) {
+    }
+    if (type == 2) {
       return new BookIterator(this);
     }
     return new CollectionIterator(this);
@@ -205,4 +206,4 @@ public:
   }
 };
 
-#endif // __MAIN_HPP
+#endif //__MAIN_HPP

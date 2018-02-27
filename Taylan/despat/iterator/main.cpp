@@ -24,18 +24,21 @@ FoodIterator::FoodIterator(const Collection *collection)
     : _collection(collection), _current(0){};
 void FoodIterator::First() {
   _current = 0;
-  while (!IsDone() && _collection->get(_current)->getType() != 1)
+  while (!IsDone() && _collection->get(_current)->getType() != 1) {
     _current++;
+  }
 }
 void FoodIterator::Next() {
   _current++;
-  while (!IsDone() && _collection->get(_current)->getType() != 1)
+  while (!IsDone() && _collection->get(_current)->getType() != 1) {
     _current++;
+  }
 }
 bool FoodIterator::IsDone() const {
   int _num = _collection->getCount();
-  while (_num >= 0 && _collection->get(_num - 1)->getType() != 1)
+  while (_num >= 0 && _collection->get(_num - 1)->getType() != 1) {
     _num--;
+  }
   return _current >= _num;
 }
 Item *FoodIterator::CurrentItem() const {
@@ -49,18 +52,21 @@ BookIterator::BookIterator(const Collection *collection)
     : _collection(collection), _current(0){};
 void BookIterator::First() {
   _current = 0;
-  while (!IsDone() && _collection->get(_current)->getType() != 2)
+  while (!IsDone() && _collection->get(_current)->getType() != 2) {
     _current++;
+  }
 }
 void BookIterator::Next() {
   _current++;
-  while (!IsDone() && _collection->get(_current)->getType() != 2)
+  while (!IsDone() && _collection->get(_current)->getType() != 2) {
     _current++;
+  }
 }
 bool BookIterator::IsDone() const {
   int _num = _collection->getCount();
-  while (_num >= 0 && _collection->get(_num - 1)->getType() != 2)
+  while (_num >= 0 && _collection->get(_num - 1)->getType() != 2) {
     _num--;
+  }
   return _current >= _num;
 }
 Item *BookIterator::CurrentItem() const {
