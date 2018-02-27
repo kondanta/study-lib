@@ -1,27 +1,36 @@
-// Taylan Dogan
-// lab2.h
-//
-// Iterator pattern:
-//
-// Provide a way to access the elements of an aggregate object
-// sequentially without exposing its underlying representation.
-//
-// The classes and/or objects participating in this pattern are:
-
-// 1. Iterator  (AbstractIterator)
-//		defines an interface for accessing and traversing elements.
-// 2. ConcreteIterator  (Iterator)
-//		implements the Iterator interface.
-//		keeps track of the current position in the traversal of the
-// aggregate.
-// 3. Aggregate  (AbstractCollection)
-//		defines an interface for creating an Iterator object
-// 4. ConcreteAggregate  (Collection)
-//		implements the Iterator creation interface to return an instance
-// of the proper ConcreteIterator
-//
-#ifndef __LAB_2_HPP
-#define __LAB_2_HPP
+/*
+ * =============================================================
+ * NOTE: MAJOR CLASSES WERE ALREADY IMPLEMENTED.
+ * I JUST MODERNIZED IT, AND CHANGED AS MY LAB WORK SUGGESTED.
+ * -> ADDING A NEW TAX CLASS
+ * -> ADDING 2 SUB CLASSES DERIVED FROM ITEM CLASS
+ * -> ADDING ITERATOR CLASSES FOR THOSE CLASSES
+ * -> AND I ALSO FIXED THE MEMORY LEAKS AS MUCH AS I CAN
+ *
+ * Taylan Dogan.
+ *==============================================================
+ *
+ * iterator pattern:
+ *
+ * provide a way to access the elements of an aggregate object
+ * sequentially without exposing its underlying representation.
+ *
+ * the classes and/or objects participating in this pattern are:
+ *
+ * 1. iterator  (abstractiterator)
+ *                 defines an interface for accessing and traversing elements.
+ * 2. concreteiterator  (iterator)
+ *                 implements the iterator interface.
+ *                 keeps track of the current position in the traversal of the
+ * aggregate.
+ * 3. aggregate  (abstractcollection)
+ *                 defines an interface for creating an iterator object
+ * 4. concreteaggregate  (collection)
+ *                 implements the iterator creation interface to return an
+ *instance of the proper concreteiterator
+ *  */
+#ifndef __MAIN_HPP
+#define __MAIN_HPP
 #include <iostream>
 #include <string>
 #include <utility>
@@ -196,4 +205,4 @@ public:
   }
 };
 
-#endif // __LAB_2_H
+#endif // __MAIN_HPP

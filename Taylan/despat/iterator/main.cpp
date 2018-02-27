@@ -1,8 +1,18 @@
-//============================================================================
-// Name        : Taylan Dogan
-// Description : Implements the Collection Iterator and the client code.
-//============================================================================
-#include "taylan-dogan-lab-2.hpp"
+/*
+ * =============================================================
+ * NOTE: MAJOR CLASSES WERE ALREADY IMPLEMENTED.
+ * I JUST MODERNIZED IT, AND CHANGED AS MY LAB WORK SUGGESTED.
+ * -> ADDING A NEW TAX CLASS
+ * -> ADDING 2 SUB CLASSES DERIVED FROM ITEM CLASS
+ * -> ADDING ITERATOR CLASSES FOR THOSE CLASSES
+ * -> AND I ALSO FIXED THE MEMORY LEAKS AS MUCH AS I CAN
+ *
+ * Taylan Dogan.
+ * ==============================================================
+
+ */
+
+#include "main.hpp"
 #include <typeinfo>
 
 using namespace std;
