@@ -9,7 +9,7 @@
 - Design Patterns (Also related with Software Architecture class):
   - [Open-Close](https://github.com/kondanta/StudyLib/tree/kondanta/Taylan/despat/open-close)
   - [Iterator Pattern](https://github.com/kondanta/StudyLib/tree/kondanta/Taylan/despat/iterator)
-
+  - [Composite Pattern](https://github.com/kondanta/StudyLib/tree/kondanta/Taylan/despat/composite)
 
 - Operating Systems(School Lab Works):
   - [Banker Algorithm](https://github.com/kondanta/StudyLib/tree/kondanta/Taylan/os/banker)
