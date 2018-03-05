@@ -4,6 +4,7 @@
 //============================================================================
 
 #include <iostream>
+#include <utility>
 #include <vector>
 
 using namespace std;
@@ -37,7 +38,7 @@ public:
   string getName() { return name; };
 
 protected:
-  DrawingElement(string name) : name(name){};
+  explicit DrawingElement(string name) : name(move(name)){};
 
 private:
   string name;
@@ -60,13 +61,13 @@ protected:
 
 class PrimitiveElement : public DrawingElement {
 public:
-  PrimitiveElement(string name) : DrawingElement(name){};
+  explicit PrimitiveElement(string name) : DrawingElement(move(name)){};
   /*
    *   void Add(DrawingElement *c) { cout << "Cannot add to a
    * PrimitiveElement\n"; } void Remove(DrawingElement *c) { cout << "Cannot
    * remove from a PrimitiveElement \n";
    *   } */
-  void Display(int indent) {
+  void Display(int indent) override {
     for (int i = 1; i <= indent; i++) {
       cout << "-";
     }
@@ -79,7 +80,7 @@ public:
 class CompositeElement : public DrawingElement {
 
 public:
-  CompositeElement(string name) : DrawingElement(name){};
+  explicit CompositeElement(string name) : DrawingElement(move(name)){};
 
   void Add(DrawingElement *d) { elements.push_back(d); };
 
@@ -93,15 +94,15 @@ public:
   }
 
   AbstractIterator *CreateIterator();
-  void Display(int indent) {
+  void Display(int indent) override {
     for (int i = 1; i <= indent; i++) {
       cout << "-";
     }
     cout << "+ " + getName() << endl;
 
     // Display each child element on this node
-    for (unsigned int i = 0; i < elements.size(); i++) {
-      elements[i]->Display(indent + 2);
+    for (auto &element : elements) {
+      element->Display(indent + 2);
     }
   }
 
@@ -109,8 +110,9 @@ public:
   DrawingElement *get(int index) const { return elements[index]; }
 
   void removeLeaks() {
-    for (DrawingElement *it : elements)
+    for (DrawingElement *it : elements) {
       delete it;
+    }
     elements.clear();
   }
 
