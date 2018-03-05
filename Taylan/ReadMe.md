@@ -22,7 +22,7 @@
 *Its a list, not an ordered list.*
 
 - Design Patterns:
-  - [ ] Composite Pattern
+  - [x] Composite Pattern
 - Data Structures and Algorithms:
   - [ ] Trees, Tries & Graph
   - [ ] Stack *from scratch* & Queue
