@@ -30,10 +30,10 @@ using namespace std;
 
 class DrawingElement {
 public:
-  virtual ~DrawingElement(){};
-  virtual void Add(DrawingElement *d){};
-  virtual void Remove(DrawingElement *d){};
-  virtual void Display(int indent){};
+  virtual ~DrawingElement() = default;
+  /* virtual void Add(DrawingElement *d){};
+   * virtual void Remove(DrawingElement *d){}; */
+  virtual void Display(int indent) = 0;
   string getName() { return name; };
 
 protected:
@@ -43,16 +43,29 @@ private:
   string name;
 };
 
+class AbstractIterator {
+public:
+  virtual ~AbstractIterator() = default;
+  virtual void First() = 0;
+  virtual void Next() = 0;
+  virtual bool IsDone() const = 0;
+  virtual void show(int indent) = 0;
+  virtual DrawingElement *CurrentItem() const = 0;
+
+protected:
+  AbstractIterator() = default;
+};
+
 // This is the "Leaf".
 
 class PrimitiveElement : public DrawingElement {
 public:
   PrimitiveElement(string name) : DrawingElement(name){};
-
-  void Add(DrawingElement *c) { cout << "Cannot add to a PrimitiveElement\n"; }
-  void Remove(DrawingElement *c) {
-    cout << "Cannot remove from a PrimitiveElement \n";
-  }
+  /*
+   *   void Add(DrawingElement *c) { cout << "Cannot add to a
+   * PrimitiveElement\n"; } void Remove(DrawingElement *c) { cout << "Cannot
+   * remove from a PrimitiveElement \n";
+   *   } */
   void Display(int indent) {
     for (int i = 1; i <= indent; i++) {
       cout << "-";
@@ -61,8 +74,8 @@ public:
   }
 };
 
+// forward decleration
 // This is the "Composite"
-
 class CompositeElement : public DrawingElement {
 
 public:
@@ -78,6 +91,8 @@ public:
       }
     }
   }
+
+  AbstractIterator *CreateIterator();
   void Display(int indent) {
     for (int i = 1; i <= indent; i++) {
       cout << "-";
