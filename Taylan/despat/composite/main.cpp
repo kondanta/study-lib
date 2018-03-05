@@ -105,30 +105,86 @@ public:
     }
   }
 
+  int getCount() const { return elements.size(); }
+  DrawingElement *get(int index) const { return elements[index]; }
+
+  void removeLeaks() {
+    for (DrawingElement *it : elements)
+      delete it;
+    elements.clear();
+  }
+
 private:
   vector<DrawingElement *> elements;
 };
 
+class CompositeIterator : public AbstractIterator {
+public:
+  explicit CompositeIterator(const CompositeElement *comp)
+      : comp(comp), _current(0){};
+  void First() override { _current = 0; }
+  void Next() override { _current++; }
+  bool IsDone() const override { return _current >= comp->getCount(); }
+  DrawingElement *CurrentItem() const override {
+    return (IsDone() ? nullptr : comp->get(_current));
+  }
+  void show(int indent) override {
+    for (int i = 1; i <= indent; i++) {
+      cout << "-";
+    }
+    cout << "+ " + this->CurrentItem()->getName() << endl;
+    // Display each child element on this node
+    for (this->First(); !this->IsDone(); this->Next()) {
+      this->CurrentItem()->Display(indent + 2);
+    }
+  }
+
+private:
+  const CompositeElement *comp;
+  int _current;
+};
+
+AbstractIterator *CompositeElement::CreateIterator() {
+  return new CompositeIterator(this);
+}
 int main() {
   // Create a tree structure
-  DrawingElement *root = new CompositeElement("Picture");
+  CompositeElement *root = new CompositeElement("Picture");
   root->Add(new PrimitiveElement("Red Line"));
-  root->Add(new PrimitiveElement("Blue Circle"));
-  root->Add(new PrimitiveElement("Green Box"));
+  root->Add(new PrimitiveElement("Yellow Line"));
 
-  DrawingElement *comp = new CompositeElement("Two Circles");
+  CompositeElement *comp = new CompositeElement("Circles");
   comp->Add(new PrimitiveElement("Black Circle"));
   comp->Add(new PrimitiveElement("White Circle"));
   root->Add(comp);
 
-  // Add and remove a PrimitiveElement
-  DrawingElement *pe = new PrimitiveElement("Yellow Line");
-  pe->Add(new PrimitiveElement("Red Line"));
-  root->Add(pe);
-  root->Remove(pe);
-
-  // Recursively display nodes
-  root->Display(1);
+  AbstractIterator *it = root->CreateIterator();
+  it->show(1);
+  // HAVE TO REMOVE EACH COLLECTION EXPLICITLY
+  comp->removeLeaks();
+  root->removeLeaks();
+  delete it;
+  delete root;
+  //  root->Display(1);
   cout << endl;
+  /*   DrawingElement *root = new CompositeElement("Picture");
+   *   root->Add(new PrimitiveElement("Red Line"));
+   *   root->Add(new PrimitiveElement("Blue Circle"));
+   *   root->Add(new PrimitiveElement("Green Box"));
+   *
+   *   DrawingElement *comp = new CompositeElement("Two Circles");
+   *   comp->Add(new PrimitiveElement("Black Circle"));
+   *   comp->Add(new PrimitiveElement("White Circle"));
+   *   root->Add(comp);
+   *
+   *   // Add and remove a PrimitiveElement
+   *   DrawingElement *pe = new PrimitiveElement("Yellow Line");
+   *   pe->Add(new PrimitiveElement("Red Line"));
+   *   root->Add(pe);
+   *   root->Remove(pe);
+   *
+   *   // Recursively display nodes
+   *   root->Display(1);
+   *   cout << endl; */
   return 0;
 }
