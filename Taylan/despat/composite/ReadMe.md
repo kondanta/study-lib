@@ -1,8 +1,8 @@
 ## TODO
 
-- Change from `transparent` to `safe`
-- Add iterator for traversing.
-- Add delete routine[memory leaks!!]
+- [x] Change from `transparent` to `safe`
+- [x] Add iterator for traversing.
+- [x] Add delete routine[memory leaks!!]
 
 ---
 *Valgrind output before editing the existing code*
@@ -78,4 +78,12 @@
 ==18572==    still reachable: 0 bytes in 0 blocks
 ==18572==         suppressed: 0 bytes in 0 blocks
 
+```
+
+---
+Vallgrind after changing the base code:
+```
+==9661== HEAP SUMMARY:
+==9661==     in use at exit: 0 bytes in 0 blocks
+==9661==   total heap usage: 14 allocs, 14 frees, 74,120 bytes allocated
 ```
