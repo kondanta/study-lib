@@ -1,6 +1,9 @@
 *.exe
 __pychache__/
 *.class
+build/
+bin/
+*.json
 
 .vscode
 .idea
