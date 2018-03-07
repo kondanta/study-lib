@@ -7,7 +7,7 @@
 #include <utility>
 #include <vector>
 
-using namespace std;
+namespace nstd {
 //
 // The classes and/or objects participating in this pattern are:
 // 1. Component   (DrawingElement)
@@ -35,7 +35,7 @@ public:
   /* virtual void Add(DrawingElement *d){};
    * virtual void Remove(DrawingElement *d){}; */
   virtual void Display(int indent) = 0;
-  string getName() { return name; };
+  std::string getName() { return name; };
 
 protected:
   explicit DrawingElement(std::string name) : name(move(name)){};
@@ -49,7 +49,7 @@ protected:
   DrawingElement &operator=(DrawingElement &&) noexcept;
 
 private:
-  string name;
+  std::string name;
 };
 
 class AbstractIterator {
@@ -85,9 +85,9 @@ public:
    *   } */
   void Display(int indent) override {
     for (int i = 1; i <= indent; i++) {
-      cout << "-";
+      std::cout << "-";
     }
-    cout << " " << getName() << endl;
+    std::cout << " " << getName() << std::endl;
   }
 };
 
@@ -96,7 +96,7 @@ public:
 class CompositeElement : public DrawingElement {
 
 public:
-  explicit CompositeElement(string name) : DrawingElement(move(name)){};
+  explicit CompositeElement(std::string name) : DrawingElement(move(name)){};
 
   void Add(DrawingElement *d) { elements.push_back(d); };
 
@@ -112,9 +112,9 @@ public:
   AbstractIterator *CreateIterator();
   void Display(int indent) override {
     for (int i = 1; i <= indent; i++) {
-      cout << "-";
+      std::cout << "-";
     }
-    cout << "+ " + getName() << endl;
+    std::cout << "+ " + getName() << std::endl;
 
     // Display each child element on this node
     for (auto &element : elements) {
@@ -133,7 +133,7 @@ public:
   }
 
 private:
-  vector<DrawingElement *> elements;
+  std::vector<DrawingElement *> elements;
 };
 
 class CompositeIterator : public AbstractIterator {
@@ -148,9 +148,9 @@ public:
   }
   void show(int indent) override {
     for (int i = 1; i <= indent; i++) {
-      cout << "-";
+      std::cout << "-";
     }
-    cout << "+ " + this->CurrentItem()->getName() << endl;
+    std::cout << "+ " + this->CurrentItem()->getName() << std::endl;
     // Display each child element on this node
     for (this->First(); !this->IsDone(); this->Next()) {
       this->CurrentItem()->Display(indent + 2);
@@ -165,18 +165,20 @@ private:
 AbstractIterator *CompositeElement::CreateIterator() {
   return new CompositeIterator(this);
 }
+
+} // namespace nstd
 int main() {
   // Create a tree structure
-  CompositeElement *root = new CompositeElement("Picture");
-  root->Add(new PrimitiveElement("Red Line"));
-  root->Add(new PrimitiveElement("Yellow Line"));
+  nstd::CompositeElement *root = new nstd::CompositeElement("Picture");
+  root->Add(new nstd::PrimitiveElement("Red Line"));
+  root->Add(new nstd::PrimitiveElement("Yellow Line"));
 
-  CompositeElement *comp = new CompositeElement("Circles");
-  comp->Add(new PrimitiveElement("Black Circle"));
-  comp->Add(new PrimitiveElement("White Circle"));
+  nstd::CompositeElement *comp = new nstd::CompositeElement("Circles");
+  comp->Add(new nstd::PrimitiveElement("Black Circle"));
+  comp->Add(new nstd::PrimitiveElement("White Circle"));
   root->Add(comp);
 
-  AbstractIterator *it = root->CreateIterator();
+  nstd::AbstractIterator *it = root->CreateIterator();
   it->show(1);
   // HAVE TO REMOVE EACH COLLECTION EXPLICITLY
   comp->removeLeaks();
@@ -184,7 +186,7 @@ int main() {
   delete it;
   delete root;
   //  root->Display(1);
-  cout << endl;
+  std::cout << std::endl;
   /*   DrawingElement *root = new CompositeElement("Picture");
    *   root->Add(new PrimitiveElement("Red Line"));
    *   root->Add(new PrimitiveElement("Blue Circle"));
