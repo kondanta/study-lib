@@ -38,7 +38,15 @@ public:
   string getName() { return name; };
 
 protected:
-  explicit DrawingElement(string name) : name(move(name)){};
+  explicit DrawingElement(std::string name) : name(move(name)){};
+  // copy ctor
+  DrawingElement(const DrawingElement &);
+  // coppy assign
+  DrawingElement &operator=(const DrawingElement &);
+  // move ctor.
+  DrawingElement(DrawingElement &&) noexcept;
+  // move assign
+  DrawingElement &operator=(DrawingElement &&) noexcept;
 
 private:
   string name;
@@ -55,13 +63,21 @@ public:
 
 protected:
   AbstractIterator() = default;
+  // copy ctor
+  AbstractIterator(const AbstractIterator &);
+  // copy assignment
+  AbstractIterator &operator=(const AbstractIterator &);
+  // move ctor
+  AbstractIterator(AbstractIterator &&) noexcept;
+  // move assignment
+  AbstractIterator &operator=(AbstractIterator &&) noexcept;
 };
 
 // This is the "Leaf".
 
 class PrimitiveElement : public DrawingElement {
 public:
-  explicit PrimitiveElement(string name) : DrawingElement(move(name)){};
+  explicit PrimitiveElement(std::string name) : DrawingElement(move(name)){};
   /*
    *   void Add(DrawingElement *c) { cout << "Cannot add to a
    * PrimitiveElement\n"; } void Remove(DrawingElement *c) { cout << "Cannot
