@@ -12,20 +12,20 @@ using namespace std;
 // The classes and/or objects participating in this pattern are:
 // 1. Component   (DrawingElement)
 //		Declares the interface for objects in the composition.
-//Implements
+// Implements
 //      default behavior for the interface common to all classes, as
 //      appropriate. declares an interface for accessing and managing its
 //		child components.
 // 2. Leaf   (PrimitiveElement)
 //		represents leaf objects in the composition. A leaf has no
-//children. 	    Defines behavior for primitive objects in the composition.
+// children. 	    Defines behavior for primitive objects in the composition.
 // 3. Composite   (CompositeElement)
 //		defines behavior for components having children. Stores child
 //		components. Implements child-related operations in the Component
-//interface.
+// interface.
 // 4. Client  (CompositeApp)
 //		Manipulates objects in the composition through the Component
-//interface.
+// interface.
 
 // This is the "Component". (i.e tree node.)
 
