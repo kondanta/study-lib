@@ -56,7 +56,7 @@ private:
 class Item {
 public:
   explicit Item(string name, int type, double price, double taxRatio)
-      : _name(move(move(name))), _type(type), _price(price) {
+      : _name{move(name)}, _type(type), _price(price) {
     this->tax.setRatio(taxRatio);
   };
   string getName() { return _name; }
