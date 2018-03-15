@@ -91,7 +91,7 @@ private:
 
 int main() {
   // time
-  std::srand(std::time(nullptr));
+  std::srand((unsigned int)std::time(nullptr));
   // event init
   EventHandler *event = nullptr;
   EventHandler *event1 = nullptr;
@@ -115,9 +115,13 @@ int main() {
   user->DO(event3);
   user->DO(event4);
 
+  delete event;
+  delete event1;
+  delete event2;
+  delete event3;
+  delete event4;
   delete md;
   delete user;
-  delete event;
 
   return 0;
 }
