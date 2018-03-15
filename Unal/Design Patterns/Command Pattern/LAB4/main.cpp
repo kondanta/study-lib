@@ -10,6 +10,7 @@ using namespace std;
 class EventHandler {
 public:
     virtual void Click() = 0;
+    virtual ~EventHandler() = default;
 protected:
     EventHandler() = default;
 };
@@ -85,6 +86,11 @@ int main(){
 
     event = new MouseEventHandler(mDriver);
     user->Work(event);
+
+    // Dtor
+    delete event;
+    delete user;
+    delete mDriver;
 
 
 }
