@@ -65,7 +65,7 @@ class MouseEventHandler : public EventHandler {
 public:
   MouseEventHandler(const MouseEventHandler &);
   MouseEventHandler &operator=(const MouseEventHandler &);
-  explicit MouseEventHandler(MouseDriver *driver) : md{std::move(driver)} {};
+  explicit MouseEventHandler(MouseDriver *driver) : md{driver} {};
   void Click() override { md->Action(); }
 
 private:
@@ -85,21 +85,21 @@ public:
     }
 
     if (_events.size() == 5) {
-      for (unsigned long i = 0; i < _events.size(); i++) {
-        each = _events[i];
+      for (auto &_event : _events) {
+        each = _event;
         each->Click();
       }
     }
   }
 
 private:
-  std::vector<EventHandler *> _events;
-  long current;
+  std::vector<EventHandler *> _events{};
+  uint64_t current;
 };
 
 int main() {
   // time
-  std::srand((unsigned int)std::time(nullptr));
+  std::srand(static_cast<unsigned int>(std::time(nullptr)));
   // event init
   EventHandler *event = nullptr;
   EventHandler *event1 = nullptr;
@@ -107,9 +107,9 @@ int main() {
   EventHandler *event3 = nullptr;
   EventHandler *event4 = nullptr;
   // invoker instance
-  User *user = new User();
+  auto *user = new User();
   // reciever instance
-  MouseDriver *md = new MouseDriver();
+  auto *md = new MouseDriver();
 
   event = new MouseEventHandler(md);
   event1 = new MouseEventHandler(md);
