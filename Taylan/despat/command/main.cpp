@@ -2,6 +2,7 @@
 #include <ctime>
 #include <fstream>
 #include <iostream>
+#include <random>
 #include <utility>
 #include <vector>
 
@@ -38,10 +39,17 @@ class MouseDriver {
 public:
   MouseDriver() : _currentX{0}, _currentY{0} {};
   void Action() {
+    // Randomizing
+    std::random_device rd;
+    std::mt19937 mt(rd());
+    // rand x y coordinates.
+    std::uniform_real_distribution<double> x(1.0, 1920.0);
+    std::uniform_real_distribution<double> y(1.0, 1080.0);
+
+    // file writing
     std::ofstream myfile;
     myfile.open("output.txt", std::ios_base::app);
-    myfile << "X axis :" << std::rand() % 1920
-           << " Y axis: " << std::rand() % 1080 << std::endl;
+    myfile << "X axis :" << x(mt) << " Y axis: " << y(mt) << std::endl;
     myfile.close();
   }
   ~MouseDriver() = default;
