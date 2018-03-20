@@ -11,6 +11,8 @@
   - [Iterator Pattern](https://github.com/kondanta/StudyLib/tree/kondanta/Taylan/despat/iterator)
   - [Composite Pattern](https://github.com/kondanta/StudyLib/tree/kondanta/Taylan/despat/composite)
   - [Command Pattern](https://github.com/kondanta/StudyLib/tree/kondanta/Taylan/despat/command)
+  - [Abstract Factory]()
+  - [Singleton](https://github.com/kondanta/StudyLib/tree/kondanta/Taylan/despat/singleton)
 
 - Operating Systems(School Lab Works):
   - [Banker Algorithm](https://github.com/kondanta/StudyLib/tree/kondanta/Taylan/os/banker)
@@ -25,6 +27,7 @@
 - Design Patterns:
   - [x] Command Pattern
   - [ ] Abstract Factory
+  - [x] Singleton
 - Data Structures and Algorithms:
   - [ ] Trees, Tries & Graph
   - [ ] Stack *from scratch* & Queue
