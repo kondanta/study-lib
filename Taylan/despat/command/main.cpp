@@ -2,6 +2,7 @@
 #include <ctime>
 #include <fstream>
 #include <iostream>
+#include <random>
 #include <utility>
 #include <vector>
 
@@ -38,10 +39,17 @@ class MouseDriver {
 public:
   MouseDriver() : _currentX{0}, _currentY{0} {};
   void Action() {
+    // Randomizing
+    std::random_device rd;
+    std::mt19937 mt(rd());
+    // rand x y coordinates.
+    std::uniform_real_distribution<double> x(1.0, 1920.0);
+    std::uniform_real_distribution<double> y(1.0, 1080.0);
+
+    // file writing
     std::ofstream myfile;
     myfile.open("output.txt", std::ios_base::app);
-    myfile << "X axis :" << std::rand() % 1920
-           << " Y axis: " << std::rand() % 1080 << std::endl;
+    myfile << "X axis :" << x(mt) << " Y axis: " << y(mt) << std::endl;
     myfile.close();
   }
   ~MouseDriver() = default;
@@ -57,7 +65,7 @@ class MouseEventHandler : public EventHandler {
 public:
   MouseEventHandler(const MouseEventHandler &);
   MouseEventHandler &operator=(const MouseEventHandler &);
-  explicit MouseEventHandler(MouseDriver *driver) : md{std::move(driver)} {};
+  explicit MouseEventHandler(MouseDriver *driver) : md{driver} {};
   void Click() override { md->Action(); }
 
 private:
@@ -77,21 +85,21 @@ public:
     }
 
     if (_events.size() == 5) {
-      for (unsigned long i = 0; i < _events.size(); i++) {
-        each = _events[i];
+      for (auto &_event : _events) {
+        each = _event;
         each->Click();
       }
     }
   }
 
 private:
-  std::vector<EventHandler *> _events;
-  long current;
+  std::vector<EventHandler *> _events{};
+  uint64_t current;
 };
 
 int main() {
   // time
-  std::srand((unsigned int)std::time(nullptr));
+  std::srand(static_cast<unsigned int>(std::time(nullptr)));
   // event init
   EventHandler *event = nullptr;
   EventHandler *event1 = nullptr;
@@ -99,9 +107,9 @@ int main() {
   EventHandler *event3 = nullptr;
   EventHandler *event4 = nullptr;
   // invoker instance
-  User *user = new User();
+  auto *user = new User();
   // reciever instance
-  MouseDriver *md = new MouseDriver();
+  auto *md = new MouseDriver();
 
   event = new MouseEventHandler(md);
   event1 = new MouseEventHandler(md);
