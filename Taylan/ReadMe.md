@@ -9,7 +9,10 @@
 - Design Patterns (Also related with Software Architecture class):
   - [Open-Close](https://github.com/kondanta/StudyLib/tree/kondanta/Taylan/despat/open-close)
   - [Iterator Pattern](https://github.com/kondanta/StudyLib/tree/kondanta/Taylan/despat/iterator)
-
+  - [Composite Pattern](https://github.com/kondanta/StudyLib/tree/kondanta/Taylan/despat/composite)
+  - [Command Pattern](https://github.com/kondanta/StudyLib/tree/kondanta/Taylan/despat/command)
+  - [Abstract Factory](https://github.com/kondanta/StudyLib/tree/kondanta/Taylan/despat/abstract-factory)
+  - [Singleton](https://github.com/kondanta/StudyLib/tree/kondanta/Taylan/despat/singleton)
 
 - Operating Systems(School Lab Works):
   - [Banker Algorithm](https://github.com/kondanta/StudyLib/tree/kondanta/Taylan/os/banker)
@@ -22,7 +25,9 @@
 *Its a list, not an ordered list.*
 
 - Design Patterns:
-  - [ ] Composite Pattern
+  - [x] Command Pattern
+  - [x] Abstract Factory
+  - [x] Singleton
 - Data Structures and Algorithms:
   - [ ] Trees, Tries & Graph
   - [ ] Stack *from scratch* & Queue
