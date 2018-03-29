@@ -24,18 +24,11 @@ public:
     static Singleton1 instance("Singleton1");
     return instance;
   }
-  /* static Singleton1 *getSingleton1() {
-   *   if (instance == nullptr) {
-   *     instance = new Singleton1("Singleton1");
-   *   }
-   *   return instance;
-   * } */
 
 private:
   Singleton1(const Singleton1 &) = delete;
   Singleton1 &operator=(const Singleton1 &) = delete;
   explicit Singleton1(string name) : AbstractClass(move(name)){};
-  /* static Singleton1 *instance; */
 };
 
 class Singleton2 : public AbstractClass {
@@ -45,19 +38,11 @@ public:
     static Singleton2 instance("Singleton2");
     return instance;
   }
-  /* static Singleton2 *getSingleton2() {
-   *   if (instance == nullptr) {
-   *     instance = new Singleton2("Singleton2");
-   *   }
-   *   return instance;
-   * } */
 
 private:
   Singleton2(const Singleton2 &) = delete;
   Singleton2 &operator=(const Singleton2 &) = delete;
-
   explicit Singleton2(string name) : AbstractClass(move(name)){};
-  /* static Singleton2 *instance; */
 };
 
 class Singleton3 : public AbstractClass {
@@ -67,27 +52,16 @@ public:
     static Singleton3 instance("Singleton1");
     return instance;
   }
-  /* static Singleton3 *getSingleton3() {
-   *   if (instance == nullptr) {
-   *     instance = new Singleton3("Singleton3");
-   *   }
-   *   return instance;
-   * } */
 
 private:
   Singleton3(const Singleton3 &) = delete;
   Singleton3 &operator=(const Singleton3 &) = delete;
-
   explicit Singleton3(string name) : AbstractClass(move(name)){};
-  /* static Singleton3 *instance; */
 };
 
-/* Singleton1 *Singleto1::instance = nullptr;
- * Singleton2 *Singleton2::instance = nullptr;
- * Singleton3 *Singleton3::instance = nullptr; */
-
-void lookUp(string const &key, map<string, AbstractClass *> container) {
-  map<string, AbstractClass *>::iterator it;
+template <typename T, typename U>
+void lookUp(string const &key, map<T, U> container) {
+  typename map<T, U>::iterator it;
   for (it = container.begin(); it != container.end(); ++it) {
     if (key == it->first) {
       it->second->printName();
@@ -96,21 +70,22 @@ void lookUp(string const &key, map<string, AbstractClass *> container) {
 }
 
 int main() {
-  map<string, AbstractClass *> test;
-  map<string, AbstractClass *>::iterator it;
+  /// Declerations
+  map<string, AbstractClass *> mapping;
   AbstractClass &ptr = Singleton1::getSingleton1();
   AbstractClass &ptr2 = Singleton2::getSingleton2();
   AbstractClass &ptr3 = Singleton3::getSingleton3();
-  test.insert(std::pair<string, AbstractClass *>("Singleton1", &ptr));
-  test.insert(std::pair<string, AbstractClass *>("Singleton2", &ptr2));
-  test.insert(std::pair<string, AbstractClass *>("Singleton3", &ptr3));
 
-  lookUp("Singleton1", test);
-  lookUp("Singleton2", test);
-  lookUp("Singleton3", test);
+  /// Mapping singletons with their keys
+  mapping.insert(std::pair<string, AbstractClass *>("Singleton1", &ptr));
+  mapping.insert(std::pair<string, AbstractClass *>("Singleton2", &ptr2));
+  mapping.insert(std::pair<string, AbstractClass *>("Singleton3", &ptr3));
 
-  /* delete ptr;
-   * delete ptr2;
-   * delete ptr3; */
+  /// lookup function that checks if the key exists in the map.
+  lookUp("Singleton1", mapping);
+  lookUp("Singleton2", mapping);
+  lookUp("Singleton3", mapping);
+  mapping.clear();
+
   return 0;
 }
