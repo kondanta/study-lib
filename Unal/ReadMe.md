@@ -14,6 +14,7 @@
   - [Open Close Principle](https://github.com/sasalx/StudyLib/tree/master/Unal/Design%20Patterns/OCP/Lab1)
   - [Composite Pattern](https://github.com/sasalx/StudyLib/tree/master/Unal/Design%20Patterns/Composite%20Pattern/LAB3)
   - [Command Pattern](https://github.com/sasalx/StudyLib/tree/master/Unal/Design%20Patterns/Command%20Pattern/LAB4)
+  - [Singleton Pattern](https://github.com/sasalx/StudyLib/tree/master/Unal/Design%20Patterns/Singleton%20Pattern/LAB6)
 
 - ### DOS Assembly
   
