@@ -2,7 +2,11 @@
 #include <utility>
 #include <vector>
 
-using namespace std;
+using std::cout;
+using std::move;
+using std::vector;
+using std::string;
+using std::endl;
 
 class Printer {
 public:
@@ -12,7 +16,7 @@ public:
     }
 protected:
     Printer() = default;
-    explicit Printer(string name) : _name(std::move(name)) {};
+    explicit Printer(string name) : _name(move(name)) {};
 private:
     string _name;
 };
@@ -91,5 +95,7 @@ int main(){
     lookUp(container, "Second");
     lookUp(container, "Third");
 
-
+    delete p1;
+    delete p2;
+    delete p3;
 }
