@@ -37,7 +37,7 @@ lea dx, msg1 ; Take the first number
 mov ah, 09h   
 int 21h  
 
-call scan_num
+call Scan_Num
 
 mov num1, cx ; first number
 
@@ -61,7 +61,7 @@ lea dx, msg3 ; Take the second number
 mov ah, 09h
 int 21h  
 
-call scan_num
+call Scan_Num ; Do work with he number
 
 mov num2, cx ; Second number
 
@@ -96,17 +96,17 @@ jmp ext
 domult:
 mov ax, num1
 imul num2 
-;call print_num  
+;call Print_Number
 jmp ext
 
 dodiv: 
 mov dx, 0
 mov ax, num1
 idiv num2
-;call print_num 
+;call Print_Number
 jmp ext
 
-SCAN_NUM PROC NEAR
+Scan_Num PROC NEAR
 
 PUSH    DX
 PUSH    AX
@@ -128,7 +128,7 @@ jmp stop_input ; if enter
 docheck:
 cmp al, '0'
 jae docheck2
-jmp not_number
+jmp not_number ; No need???
 
 docheck2:
 cmp al, '9'
@@ -145,7 +145,7 @@ pop AX
 sub AL, 30h
 
 mov AH, 0
-mov DX, CX      ; backup, in case the result will be too big.
+mov DX, CX ; backup, in case the result will be too big.
 add CX, AX
 
 jmp mainn  
@@ -156,36 +156,40 @@ mov ah, 9
 int 21h
 jmp stop_input
         
-stop_input:
+stop_input: ; stop the work
 POP SI
 POP AX
 POP DX
 RET
-SCAN_NUM ENDP
+
+Scan_Num ENDP
 
 Print_Number PROC NEAR
-    mov cx, 0 ; counters
-    mov bx, 10
+
+mov cx, 0 ; counter
+mov bx, 10 ; will be used as 10
+
 loopp:
-    mov dx, 0
-    div bx                          ;divide by ten
+mov dx, 0
+div bx
 
-    push ax
-    add dl, '0'                     ;convert dl to ascii
+push ax
+add dl, '0' ;convert dl to ascii
 
-    pop ax                          ;restore ax
-    push dx                         ;digits are in reversed order, must use stack
-    inc cx                          ;remember how many digits we pushed to stack
-    cmp ax, 0                       ;if ax is zero, we can quit
-    jnz loopp
-    mov ah, 2                       ;2 is the function number of output char in the DOS Services.
+pop ax
+push dx
+inc cx ; loop inc
+cmp ax, 0
+jnz loopp
+mov ah, 2
+
 loopp2:
-    pop dx                          
-    int 21h                         
-    loop loopp2
-    ret
-Print_Number ENDP
+pop dx                          
+int 21h                         
+loop loopp2
+ret
 
+Print_Number ENDP
 
 ext:
 MOV DX,OFFSET NEWLINE
