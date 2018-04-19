@@ -16,6 +16,7 @@
   - [Command Pattern](https://github.com/sasalx/StudyLib/tree/master/Unal/Design%20Patterns/Command%20Pattern/LAB4)
   - [Singleton Pattern](https://github.com/sasalx/StudyLib/tree/master/Unal/Design%20Patterns/Singleton%20Pattern/LAB6)
   - [Facade Pattern](https://github.com/sasalx/StudyLib/tree/master/Unal/Design%20Patterns/Facade%20Pattern/Lab7)
+  - [Adaptor Pattern](https://github.com/sasalx/StudyLib/tree/master/Unal/Design%20Patterns/Adaptor%20Pattern/Lab8)
 
 - ### DOS Assembly
   
