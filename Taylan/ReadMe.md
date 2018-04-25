@@ -13,6 +13,7 @@
   - [Command Pattern](https://github.com/kondanta/StudyLib/tree/kondanta/Taylan/despat/command)
   - [Abstract Factory](https://github.com/kondanta/StudyLib/tree/kondanta/Taylan/despat/abstract-factory)
   - [Singleton](https://github.com/kondanta/StudyLib/tree/kondanta/Taylan/despat/singleton)
+  - [Facade](https://github.com/kondanta/StudyLib/tree/kondanta/Taylan/despat/facade)
 
 - Operating Systems(School Lab Works):
   - [Banker Algorithm](https://github.com/kondanta/StudyLib/tree/kondanta/Taylan/os/banker)
