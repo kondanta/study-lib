@@ -15,6 +15,7 @@
   - [Singleton](https://github.com/kondanta/StudyLib/tree/kondanta/Taylan/despat/singleton)
   - [Facade](https://github.com/kondanta/StudyLib/tree/kondanta/Taylan/despat/facade)
   - [Adapter](https://github.com/kondanta/StudyLib/tree/kondanta/Taylan/despat/adaptor)
+  - [Observer](https://github.com/kondanta/StudyLib/tree/kondanta/Taylan/despat/observer)
 
 - Operating Systems(School Lab Works):
   - [Banker Algorithm](https://github.com/kondanta/StudyLib/tree/kondanta/Taylan/os/banker)
