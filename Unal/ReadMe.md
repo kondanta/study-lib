@@ -17,8 +17,6 @@
   - [Singleton Pattern](https://github.com/sasalx/StudyLib/tree/master/Unal/Design%20Patterns/Singleton%20Pattern/LAB6)
   - [Facade Pattern](https://github.com/sasalx/StudyLib/tree/master/Unal/Design%20Patterns/Facade%20Pattern/Lab7)
   - [Adaptor Pattern](https://github.com/sasalx/StudyLib/tree/master/Unal/Design%20Patterns/Adaptor%20Pattern/Lab8)
+  - [Observer Pattern](https://github.com/sasalx/StudyLib/tree/master/Unal/Design%20Patterns/Observer%20Pattern/LAB10)
 
-- ### DOS Assembly
-  
-  - [Lowercase/Uppercase](https://github.com/sasalx/StudyLib/tree/master/Unal/DOS_Assembly/Lowercase-Uppercase)
-  - [Calculator](https://github.com/sasalx/StudyLib/tree/master/Unal/DOS_Assembly/Calculator)
+  - [Homework Project](https://github.com/sasalx/StudyLib/tree/master/Unal/Design%20Patterns/Homework%20Project)
