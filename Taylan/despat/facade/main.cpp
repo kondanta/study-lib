@@ -1,119 +1,118 @@
 #include <gsl/gsl>
 #include <iostream>
 #include <memory>
-#include <string>
 #include <utility>
+#include <vector>
 
 using std::cout;
-using std::endl;
 using std::move;
 using std::string;
+template <class T> using vector = std::vector<T>;
+template <class T> using ptr = std::unique_ptr<T>;
 
-template <typename Type> using ptr = std::unique_ptr<Type>;
-
-// The classes and/or objects participating in this pattern are:
-// 1. Facade   (Mortgage)
-//		- knows which subsystem classes are responsible for a request.
-//		- delegates client requests to appropriate subsystem objects.
-// 2. Subsystem classes   (Bank, Credit, Loan)
-//		- implement subsystem functionality.
-//		- handle work assigned by the Facade object.
-//		- have no knowledge of the facade and keep no reference to it.
-
-// Client class. "Customer"
-
-class Customer {
+class PcParts {
 public:
-  // Constructor
-  explicit Customer(string name) : name(move(name)){};
-  string getName() { return name; }
+  virtual ~PcParts() = default;
+  PcParts(string name, double price) : name_{move(name)}, price_{price} {};
+  double getPrice() { return price_; }
+  string getName() { return name_; }
 
 private:
-  string name;
+  string name_;
+  double price_;
 };
 
-// Subsystem Class 1. "Bank"
-
-class Bank {
+class Intel : public PcParts {
 public:
-  bool HasSufficientSavings(Customer *c, int amount) {
-    cout << "Check bank for " << c->getName() << " for the amount " << amount
-         << endl;
-    return true;
-  }
+  Intel(string name, double price) : PcParts{move(name), price} {};
+  virtual void orderCpu() = 0;
 };
 
-// Subsystem Class 2. "Credit"
-
-class Credit {
+class CPU : public Intel {
 public:
-  bool HasGoodCredit(Customer *c) {
-    cout << "Check credit for " << c->getName() << endl;
-    return true;
+  CPU(string name, double price) : Intel{move(name), price} {};
+  void orderCpu() override {
+    cout << "Intel i7 ----"
+         << "by INTEL\n";
   }
 };
 
-// Subsystem Class 3. "Loan"
-
-class Loan {
+class Nvidia : public PcParts {
 public:
-  bool HasNoBadLoans(Customer *c) {
-    cout << "Check loans for " << c->getName() << endl;
-    return true;
+  Nvidia(string name, double price) : PcParts{move(name), price} {};
+  virtual void orderGpu() = 0;
+};
+
+class GPU : public Nvidia {
+public:
+  GPU(string name, double price) : Nvidia{move(name), price} {};
+  void orderGpu() override {
+    cout << "Nvidia 1080 TI ----"
+         << "by Nvidia\n";
   }
 };
 
-// Facade. "Mortgage"
-
-class Mortgage {
+class AbstractFactory {
 public:
-  Mortgage() {
-    bank = new Bank();
-    loan = new Loan();
-    credit = new Credit();
-  }
-  ~Mortgage() {
-    delete bank;
-    delete loan;
-    delete credit;
-  }
-  bool IsEligible(Customer *cust, int amount) {
-    cout << cust->getName() << " applies for " << amount << "TL loan" << endl;
-    bool eligible = true;
+  virtual ~AbstractFactory() = default;
+  virtual CPU *createCPU() = 0;
+  virtual GPU *createGPU() = 0;
+};
 
-    // Check creditworthyness of applicant
-    if (!bank->HasSufficientSavings(cust, amount)) {
-      eligible = false;
-    } else if (!loan->HasNoBadLoans(cust)) {
-      eligible = false;
-    } else if (!credit->HasGoodCredit(cust)) {
-      eligible = false;
+class GPUFactory : public AbstractFactory {
+  GPU *createGPU() override { return new GPU("1080 ti", 3000); }
+  CPU *createCPU() override { return nullptr; }
+};
+
+class CPUFactory : public AbstractFactory {
+public:
+  CPU *createCPU() override { return new CPU("8700k", 3200); }
+  GPU *createGPU() override { return nullptr; }
+};
+
+class Facade {
+public:
+  ~Facade() {
+    delete c;
+    delete gp;
+  }
+  double assemblyPC(vector<PcParts *> p) {
+    double sum = 0.0;
+    gp = new GPUFactory();
+    c = new CPUFactory();
+    gsl::owner<Nvidia *> gpu = gp->createGPU();
+    gsl::owner<Intel *> cpu = c->createCPU();
+
+    gpu->orderGpu();
+    cpu->orderCpu();
+
+    p.push_back(cpu);
+    p.push_back(gpu);
+
+    sum = calculatePrice(p);
+    delete gpu;
+    delete cpu;
+    return sum;
+  }
+
+  double calculatePrice(vector<PcParts *> p) {
+    double sum = 0.0;
+    for (PcParts *elem : p) {
+      sum += elem->getPrice();
     }
-    return eligible;
+    return sum;
   }
 
 private:
-  gsl::owner<Bank *> bank;
-  gsl::owner<Loan *> loan;
-  gsl::owner<Credit *> credit;
+  gsl::owner<AbstractFactory *> c;
+  gsl::owner<AbstractFactory *> gp;
 };
 
 int main() {
+  ptr<Facade> person(new Facade());
+  vector<PcParts *> parts;
+  cout << person->assemblyPC(parts);
+  parts.clear();
 
-  // Facade
-  /* Mortgage *mortgage = new Mortgage(); */
-  ptr<Mortgage> mortgage(new Mortgage);
-  string name;
-  name = "Taylan";
-
-  // Evaluate mortgage eligibility for customer
-  gsl::owner<Customer *> customer;
-  customer = new Customer(name);
-  bool eligable = mortgage->IsEligible(customer, 100000);
-
-  cout << endl << customer->getName();
-  cout << " has been " << (eligable ? "Approved" : "Rejected");
-
-  delete customer;
   return 0;
 }
