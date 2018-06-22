@@ -25,6 +25,7 @@
  *
  * */
 
+// Command
 class EventHandler {
 public:
   virtual ~EventHandler() = default;
@@ -78,16 +79,18 @@ public:
   User() : current{0} {};
   void DO(EventHandler *event) {
     std::ofstream myfile("output.txt");
-    EventHandler *each = nullptr;
+    EventHandler *each = nullptr; // WHY ?
     if (_events.size() < 5) {
       _events.push_back(event);
       current++;
     }
 
-    if (_events.size() == 5) {
+    // Empty the q after 5 commands stacked.
+    if (_events.size() >= 5) {
       for (auto &_event : _events) {
         each = _event;
         each->Click();
+	delete _event;
       }
     }
   }
