@@ -23,7 +23,7 @@ class LinearRegression:
         # N for the Nth number
         n = np.size(self.list1)
         # Mean value of the lists
-        mean_list1, mean_list2 = np.mean(self.list1),
+        mean_list1, mean_list2 = np.mean(self.list1),\
         np.mean(self.list2)
 
         # Calculating the cross-deviation
