@@ -63,5 +63,4 @@ class LinearRegression:
 lr = LinearRegression()
 
 lr.fill_lists()
-lr.calculate_linear_regression_coefficients()
 lr.build_the_graph()
