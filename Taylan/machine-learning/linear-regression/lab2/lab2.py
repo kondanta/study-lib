@@ -4,37 +4,38 @@ import csv
 
 # This is the same code from lab1. I'll add RSS calculation and
 # data training(?)
+
+
 class LinearRegression:
 
     def fill_lists(self, csv_name):
         list1 = list()
         list2 = list()
-        
+
         with open(csv_name, "r", newline='',
                   encoding='ISO-8859-1') as csvfile:
             row = csv.DictReader(csvfile)
             for i in row:
                 list1 = np.append(list1, i['Age'])\
-                               .astype(dtype=float)
+                    .astype(dtype=float)
                 list2 = np.append(list2,
-                                       i['Experience'])\
-                               .astype(dtype=float)
+                                  i['Experience'])\
+                    .astype(dtype=float)
         return list1, list2
 
-                
     def calculate_linear_regression_coefficients(self, age_list, exp_list):
         # N for the Nth number
         n = np.size(age_list)
         # Mean value of the lists
         mean_list1, mean_list2 = np.mean(age_list),\
-        np.mean(exp_list)
+            np.mean(exp_list)
 
         # Calculating the cross-deviation
         SS_xy = 0
         SS_xx = 0
         for i in range(n):
             SS_xy += (age_list[i] - mean_list1) * \
-            (exp_list[i] - mean_list2)
+                (exp_list[i] - mean_list2)
             SS_xx += (age_list[i] - mean_list1) ** 2
 
         # Calculating the coefficients.
