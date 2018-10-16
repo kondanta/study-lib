@@ -61,6 +61,19 @@ class LinearRegression:
         # show the graph
         plt.show()
 
+    def calculate_rss(self, age_list, exp_list, coefficients):
+        n = np.size(age_list)
+        rss_value = 0
+        # finding rss value
+        for i in range(n):
+            # Algorithm: Summation, i from 0 to n where
+            # yi - !y ^ 2 equals the RSS
+            rss_value += (exp_list[i] - ((coefficients[0] * age_list[i])
+                                         + coefficients[1])) ** 2
+
+        print(rss_value)
+        return rss_value
+
 
 lr = LinearRegression()
 
@@ -76,3 +89,7 @@ reg_line_csv2 = lr.calculate_linear_regression_coefficients(csv2_x, csv2_y)
 # Giving reverse coefs for checking the model on the new data set
 lr.build_the_graph(csv1_x, csv1_y, reg_line_csv2)
 lr.build_the_graph(csv2_x, csv2_y, reg_line_csv1)
+
+# Calculating the RSS
+lr.calculate_rss(csv1_x, csv1_y, reg_line_csv2)
+lr.calculate_rss(csv2_x, csv2_y, reg_line_csv1)
