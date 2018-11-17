@@ -20,7 +20,7 @@ int List::size(){
   return counter;
 }
 
-void List::insertBack(int data){
+void List::append(int data){
   Node<int> *node = new Node<int>();
   node->setValue(data);
   // Init a new node.

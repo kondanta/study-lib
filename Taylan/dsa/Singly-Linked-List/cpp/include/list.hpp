@@ -9,7 +9,7 @@ private:
   Node<int> *_head;
 public:
   List();
-  void insertBack(int);
+  void append(int);
   bool isEmpty();
   int size();
 };
