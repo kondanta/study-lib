@@ -57,3 +57,9 @@ int List::getTailValue(){
   return node->getValue();
 }
 
+void List::insertFront(int value){
+  Node<int> *node = new Node<int>();
+  node->setValue(value);
+  node->setNext(this->_head);
+  this->_head = node;
+}

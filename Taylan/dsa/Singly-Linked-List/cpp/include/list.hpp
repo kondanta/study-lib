@@ -13,6 +13,7 @@ public:
   bool isEmpty();
   int size();
   void initList(int);
+  void insertFront(int);
   int getHeadValue();
   int getTailValue();
 };

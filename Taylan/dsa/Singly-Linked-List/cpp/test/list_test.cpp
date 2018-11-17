@@ -77,3 +77,10 @@ TEST_F(ListTest, InitWithINTOverflowShouldReturnZERO){
   EXPECT_EQ(0, _lst->getHeadValue());
 }
 
+TEST_F(ListTest, InsertingANodeInFrontOfTheList){
+  _lst->initList(2);
+  EXPECT_EQ(2, _lst->getHeadValue());
+  _lst->insertFront(5);
+  EXPECT_EQ(5, _lst->getHeadValue());
+  EXPECT_EQ(2, _lst->getTailValue());
+}
