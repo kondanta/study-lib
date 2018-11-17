@@ -9,7 +9,8 @@ matrix:
             - ubuntu-toolchain-r-test
           before_install:
             - pip install --user cpp-coveralls
-            - cd Taylan/dsa/Singly-Linked-List/cpp/
+          before_script:
+            - cd $TRAVIS_BUILD_DIR/Taylan/dsa/Singly-Linked-List/cpp
           script:
             - cmake -H. -Bbuild
             - cd build
