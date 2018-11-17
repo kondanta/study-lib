@@ -19,6 +19,7 @@ public:
   int valueAt(int);
   int popHead();
   int popTail();
+  void insert(int/*index*/, int/*value*/);
 };
 
 

@@ -103,7 +103,7 @@ TEST_F(ListTest, ValueAtShouldBeWorkWithAnySizeOfList){
   }
   EXPECT_EQ(_lst->getTailValue(), _lst->valueAt(100));
   EXPECT_EQ(_lst->getHeadValue(), _lst->valueAt(0));
-  EXPECT_EQ(50, _lst->valueAt(50));
+  EXPECT_EQ(99, _lst->valueAt(99));
 }
 
 TEST_F(ListTest, ShouldPopHeadAndReturnItsValue){
@@ -134,5 +134,36 @@ TEST_F(ListTest, SizeShouldBeDecreasedAfterTailPop){
   EXPECT_PRED3([](int expected, int actual, int size){
 		return expected == actual && size == 1;
 	       }, 7, popVal, _lst->size());
+}
+
+TEST_F(ListTest, InsertIndexZERO){
+  _lst->initList(5);
+  _lst->insert(0, 7);
+  EXPECT_EQ(7, _lst->getHeadValue());
+}
+
+TEST_F(ListTest, SizeShouldBeIncreasedAfterInsertion){
+  _lst->initList(3);
+  _lst->insert(0, 7);
+  EXPECT_PRED3([](int expected, int actual, int size){
+		 return expected == actual && size == 2;
+	       },7, _lst->getHeadValue(), _lst->size());
+}
+
+TEST_F(ListTest, IfKthIndexNotExistsInsertTail){
+  _lst->initList(7);
+  _lst->append(3);
+  _lst->insert(4, 4);
+  EXPECT_EQ(4, _lst->getTailValue());
+}
+
+TEST_F(ListTest, InsertKthPosition){
+  _lst->initList(10);
+  for(int i = 1; i < 5; ++i){
+    _lst->append(i);
+  }
+  _lst->insert(3, 12); // [0] -> [1] -> [2]
+                      // this inserts into index 3
+  EXPECT_EQ(12, _lst->valueAt(3));
 }
 

@@ -66,7 +66,7 @@ void List::insertFront(int value){
 
 int List::valueAt(int index){
   Node<int> *tmp = this->_head;
-  for(int i = 0; i < index; ++i){
+  for(int i = 0; i != index; ++i){
     tmp = tmp->getNext();
   }
   return tmp->getValue();
@@ -89,4 +89,27 @@ int List::popTail(){
   value = tmp->getNext()->getValue();
   tmp->setNext();
   return value;
+}
+
+void List::insert(int index, int value){
+  Node<int> *node = new Node<int>();
+  node->setValue(value);
+  if(index == 0){
+    node->setNext(this->_head);
+    this->_head = node;
+    return;
+  }
+  if(index >= size()){
+    append(value);
+    delete node;
+    return;
+  }
+  Node<int> *tmp = this->_head;
+  // index - 1 because we want to change the given index
+  // not the after one.
+  for(int i = 0; i < index - 1; ++i){
+    tmp = tmp->getNext();
+  }
+  node->setNext(tmp->getNext());
+  tmp->setNext(node);
 }
