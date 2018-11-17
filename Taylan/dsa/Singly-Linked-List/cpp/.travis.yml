@@ -1,7 +1,6 @@
 sudo: false
 
-language:
-  - cpp
+language: cpp
 
 addons:
   apt:
@@ -18,7 +17,6 @@ script:
   - ./bin/unit_tests
 
 after_success:
-  - coveralls --root .. -E ".*external.*" -E ".*CMakeFiles.*" -E ".*test/.*.cpp.*"
   - bash <(curl -s https://codecov.io/bash)
 
 notifications:
