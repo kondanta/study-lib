@@ -38,6 +38,8 @@ void List::append(int data){
 }
 
 void List::initList(int value){
+  //overflow guard
+  value < 0 ? value = 0 : value;
   Node<int> *node = new Node<int>();
   node->setValue(value);
   this->_head = node;

@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include <climits>
 #include "list.hpp"
 
 class ListTest : public ::testing::Test {
@@ -53,3 +54,26 @@ TEST_F(ListTest, InitList){
   ASSERT_FALSE(_lst->isEmpty());
   ASSERT_EQ(2, _lst->getHeadValue());
 }
+TEST_F(ListTest, InitTestWithWrongValue){
+  int value = INT_MAX;
+  _lst->initList(value);
+  // For checking MAX value causes anything
+  EXPECT_PRED2([](int expected, int actual){
+		 return expected != actual;
+	       }, 0, _lst->getHeadValue());
+}
+
+TEST_F(ListTest, InitWithIntMaxPlusOneReturnsINTMAXMinus){
+  int value = INT_MAX + 1; // will cause an overflow
+  _lst->initList(value);
+  EXPECT_PRED2([](int expected, int actual){
+		 return expected != actual;
+	       },_lst->getHeadValue(), -2147483648);
+}
+
+TEST_F(ListTest, InitWithINTOverflowShouldReturnZERO){
+  int value = INT_MAX + 1;
+  _lst->initList(value);
+  EXPECT_EQ(0, _lst->getHeadValue());
+}
+
