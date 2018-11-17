@@ -9,8 +9,7 @@ matrix:
             - ubuntu-toolchain-r-test
           before_install:
             - pip install --user cpp-coveralls
-          before_script:
-            - cd Taylan/dsa/Singly-Linked-List/cpp
+            - cd Taylan/dsa/Singly-Linked-List/cpp/
           script:
             - cmake -H. -Bbuild
             - cd build
