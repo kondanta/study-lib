@@ -36,6 +36,6 @@ matrix:
         - cmake --build .
         - ./bin/unit_tests
       after_success:
-        - coveralls --root .. -E ".*external.*" -E ".*CMakeFiles.*" -E ".*test/.*.cpp.*"
+        - coveralls --root .. -E ".*external.*" -E ".*CMakeFiles.*" -E ".*test/.*.cpp.*" -E ".*googletest/.*"
 notifications:
   email: false
