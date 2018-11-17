@@ -7,10 +7,13 @@ matrix:
         apt:
           sources:
             - ubuntu-toolchain-r-test
+          packages:
+            - cmake-data
+            - cmake
           before_install:
             - pip install --user cpp-coveralls
           before_script:
-            - cd $TRAVIS_BUILD_DIR/Taylan/dsa/Singly-Linked-List/cpp
+            - cd Taylan/dsa/Singly-Linked-List/cpp
           script:
             - cmake -H. -Bbuild
             - cd build
