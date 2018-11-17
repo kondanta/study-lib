@@ -1,14 +1,17 @@
 #ifndef LIST_H
 #define LIST_H
 
-#import "node.hpp"
+#include "node.hpp"
 
 class List
 {
 private:
   Node<int> *_head;
 public:
-  
+  List();
+  void insertBack(int);
+  bool isEmpty();
+  int size();
 };
 
 
