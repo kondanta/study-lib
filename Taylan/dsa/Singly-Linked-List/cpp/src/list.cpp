@@ -36,3 +36,10 @@ void List::append(int data){
   }
   tmp->setNext(node);
 }
+
+void List::initList(int value){
+  Node<int> *node = new Node<int>();
+  node->setValue(value);
+  this->_head = node;
+}
+

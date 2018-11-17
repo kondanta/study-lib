@@ -37,4 +37,11 @@ TEST_F(ListTest, TestIsAppendWork){
   EXPECT_EQ(81, _lst->getTailValue());
 }
 
+TEST_F(ListTest, InitList){
+  ASSERT_TRUE(_lst->isEmpty());
+  // then
+  // Init list with a value;
+  _lst->initList(2);
+  ASSERT_FALSE(_lst->isEmpty());
+  ASSERT_EQ(2, _lst->getHeadValue());
 }

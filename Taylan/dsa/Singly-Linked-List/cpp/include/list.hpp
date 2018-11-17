@@ -12,6 +12,7 @@ public:
   void append(int);
   bool isEmpty();
   int size();
+  void initList(int);
 };
 
 
