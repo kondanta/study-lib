@@ -43,3 +43,15 @@ void List::initList(int value){
   this->_head = node;
 }
 
+int List::getHeadValue(){
+  return this->_head->getValue();
+}
+
+int List::getTailValue(){
+  Node<int> *node = this->_head;
+  while(node->hasNext()){
+    node = node->getNext();
+  }
+  return node->getValue();
+}
+

@@ -29,12 +29,20 @@ TEST_F(ListTest, InsertBackToTheList){
   _lst->append(5);
   _lst->append(7);
   EXPECT_FALSE(_lst->isEmpty());
+  EXPECT_EQ(7, _lst->getTailValue());
+}
 
 TEST_F(ListTest, TestIsAppendWork){
   for(int i = 0; i < 10; ++i){
     _lst->append(i*i);
   }
   EXPECT_EQ(81, _lst->getTailValue());
+}
+
+TEST_F(ListTest, GetListsHeadNodesValue){
+  _lst->initList(2);
+  int value = _lst->getHeadValue();
+  EXPECT_EQ(2, value);
 }
 
 TEST_F(ListTest, InitList){
