@@ -79,3 +79,14 @@ int List::popHead(){
   delete tmp;
   return value;
 }
+
+int List::popTail(){
+  Node<int> *tmp = this->_head;
+  int value;
+  while(tmp->getNext()->hasNext()){
+    tmp = tmp->getNext();
+  }
+  value = tmp->getNext()->getValue();
+  tmp->setNext();
+  return value;
+}

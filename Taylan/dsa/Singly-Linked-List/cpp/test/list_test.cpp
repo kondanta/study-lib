@@ -113,11 +113,26 @@ TEST_F(ListTest, ShouldPopHeadAndReturnItsValue){
   EXPECT_EQ(5, _lst->popHead());
 }
 
-TEST_F(ListTest, SizeShouldBeDecreasedAfterPop){
+TEST_F(ListTest, SizeShouldBeDecreasedAfterHeadPop){
   _lst->initList(5);
   int popVal = _lst->popHead();
   EXPECT_PRED3([](int expected, int actual, int size){
 		return expected == actual && size == 0;
 	       }, 5, popVal, _lst->size());
+}
+
+TEST_F(ListTest, ShouldReturnToTheTailValueAndPopTail){
+  _lst->initList(5);
+  _lst->append(7);
+  EXPECT_EQ(7, _lst->popTail());
+}
+
+TEST_F(ListTest, SizeShouldBeDecreasedAfterTailPop){
+  _lst->initList(5);
+  _lst->append(7);
+  int popVal = _lst->popTail();
+  EXPECT_PRED3([](int expected, int actual, int size){
+		return expected == actual && size == 1;
+	       }, 7, popVal, _lst->size());
 }
 
