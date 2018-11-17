@@ -84,3 +84,24 @@ TEST_F(ListTest, InsertingANodeInFrontOfTheList){
   EXPECT_EQ(5, _lst->getHeadValue());
   EXPECT_EQ(2, _lst->getTailValue());
 }
+
+TEST_F(ListTest, ValueAtIndexZeroShouldBeEqualToTheGetHeadValue){
+  _lst->initList(5);
+  EXPECT_EQ(_lst->getHeadValue(), _lst->valueAt(0));
+}
+
+TEST_F(ListTest, ValueAtIndexShouldBeEqualToTheTailValue){
+  _lst->initList(5);
+  _lst->append(7);
+  EXPECT_EQ(_lst->getTailValue(), _lst->valueAt(1));
+}
+
+TEST_F(ListTest, ValueAtShouldBeWorkWithAnySizeOfList){
+  _lst->initList(0);
+  for(int i = 1; i < 101; ++i){
+    _lst->append(i);
+  }
+  EXPECT_EQ(_lst->getTailValue(), _lst->valueAt(100));
+  EXPECT_EQ(_lst->getHeadValue(), _lst->valueAt(0));
+  EXPECT_EQ(50, _lst->valueAt(50));
+}

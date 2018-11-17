@@ -63,3 +63,11 @@ void List::insertFront(int value){
   node->setNext(this->_head);
   this->_head = node;
 }
+
+int List::valueAt(int index){
+  Node<int> *tmp = this->_head;
+  for(int i = 0; i < index; ++i){
+    tmp = tmp->getNext();
+  }
+  return tmp->getValue();
+}

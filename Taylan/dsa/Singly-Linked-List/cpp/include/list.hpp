@@ -16,6 +16,7 @@ public:
   void insertFront(int);
   int getHeadValue();
   int getTailValue();
+  int valueAt(int);
 };
 
 
