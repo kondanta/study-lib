@@ -105,3 +105,19 @@ TEST_F(ListTest, ValueAtShouldBeWorkWithAnySizeOfList){
   EXPECT_EQ(_lst->getHeadValue(), _lst->valueAt(0));
   EXPECT_EQ(50, _lst->valueAt(50));
 }
+
+TEST_F(ListTest, ShouldPopHeadAndReturnItsValue){
+  _lst->initList(5);
+  _lst->append(7);
+  // ASSERTION
+  EXPECT_EQ(5, _lst->popHead());
+}
+
+TEST_F(ListTest, SizeShouldBeDecreasedAfterPop){
+  _lst->initList(5);
+  int popVal = _lst->popHead();
+  EXPECT_PRED3([](int expected, int actual, int size){
+		return expected == actual && size == 0;
+	       }, 5, popVal, _lst->size());
+}
+

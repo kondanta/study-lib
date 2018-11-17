@@ -17,6 +17,7 @@ public:
   int getHeadValue();
   int getTailValue();
   int valueAt(int);
+  int popHead();
 };
 
 

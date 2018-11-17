@@ -71,3 +71,11 @@ int List::valueAt(int index){
   }
   return tmp->getValue();
 }
+
+int List::popHead(){
+  Node<int> *tmp = this->_head;
+  int value = this->_head->getValue();
+  this->_head = this->_head->getNext();
+  delete tmp;
+  return value;
+}
