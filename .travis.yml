@@ -36,6 +36,6 @@ matrix:
         - cmake --build .
         - ./bin/unit_tests
       after_success:
-        - bash <(curl -s https://codecov.io/bash)
+        - coveralls --root .. -E ".*external.*" -E ".*CMakeFiles.*" -E ".*test/.*.cpp.*"
 notifications:
   email: false
