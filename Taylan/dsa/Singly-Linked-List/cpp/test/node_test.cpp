@@ -24,6 +24,6 @@ TEST_F(NodeTest, HasNextInit){
 TEST_F(NodeTest, HasNextHavingANextObj){
   Node<int> *o1 = new Node<int>();
   _obj.setNext(o1);
-  ASSERT_TRUE(_obj.hasNext());
+  EXPECT_TRUE(_obj.hasNext());
   delete o1;
 }

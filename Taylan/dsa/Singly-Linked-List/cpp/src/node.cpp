@@ -3,7 +3,7 @@
 #include "node.hpp"
 
 template<typename T>
-Node<T>::Node() = default;
+Node<T>::Node() : _next{nullptr}{};
 
 template<typename T>
 Node<T>::~Node() = default;
