@@ -215,3 +215,17 @@ TEST_F(ListTest, ShouldReturnToValueFromBack){
   EXPECT_EQ(0, _lst->kthValueFromTail(10));
 }
 
+TEST_F(ListTest, ShouldRemoveTheNodeByGivenValue){
+  _lst->initList(0);
+  _lst->append(10);
+  _lst->removeValue(10);
+  EXPECT_EQ(1, _lst->size());
+}
+
+TEST_F(ListTest, ShouldDoNothingWhenValueNotExistsInTheList){
+  _lst->initList(0);
+  _lst->append(20);
+  _lst->removeValue(100);
+
+  EXPECT_EQ(2, _lst->size());
+}

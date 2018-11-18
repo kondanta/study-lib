@@ -6,6 +6,16 @@ List::List(){
   this->_head = nullptr;
 };
 
+List::~List(){
+  Node<int> *node = this->_head;
+  while(node != nullptr){
+    Node<int> *next = node->getNext();
+    delete node;
+    node = next;
+  }
+  this->_head = nullptr;
+}
+
 bool List::isEmpty(){
   return this->_head == nullptr ? true : false;
 }
@@ -149,4 +159,17 @@ void List::reverse(){
 int List::kthValueFromTail(int index){
   index >= size() ? index = size() - 1 : index;
   return valueAt((size() - 1) - index);
+}
+
+void List::removeValue(int value){
+  Node<int> *tmp = this->_head->getNext();
+  Node<int> *prev = this->_head;
+  while(tmp != nullptr){
+    if(tmp->getValue() == value){
+      prev->setNext(tmp->getNext());
+      delete tmp;
+    }
+    prev = tmp;
+    tmp = tmp->getNext();
+  }
 }
