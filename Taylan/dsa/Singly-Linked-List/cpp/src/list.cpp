@@ -132,3 +132,17 @@ void List::erase(int index){
   delete tmp;
 }
 
+void List::reverse(){
+  Node<int> *tmp = _head;
+  Node<int> *second = new Node<int>();
+  Node<int> *reversedList = nullptr;
+
+  while(tmp){
+    second = tmp->getNext();
+    tmp->setNext(reversedList);
+    reversedList = tmp;
+    tmp = second;
+  }
+  this->_head = reversedList;
+}
+

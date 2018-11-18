@@ -191,3 +191,13 @@ TEST_F(ListTest, ShouldEraseFromKthPosition){
   EXPECT_EQ(9, _lst->size());
 }
 
+TEST_F(ListTest, ShouldReverseTheList){
+  _lst->initList(0);
+  for (int i = 1; i < 10; ++i) {
+    _lst->append(i);
+  }
+  _lst->reverse();
+  EXPECT_EQ(0, _lst->getTailValue());
+  EXPECT_EQ(9, _lst->getHeadValue());
+}
+
