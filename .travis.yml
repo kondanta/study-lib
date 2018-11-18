@@ -1,0 +1,41 @@
+sudo: required
+
+matrix:
+  include:
+    - language: cpp
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-trusty-6.0
+          packages:
+            - cmake-data
+            - cmake
+            #- clang-6.0
+            #- libstdc++-7-dev
+            - gcc-6
+            - g++-6
+      env:
+        - MATRIX_EVAL="CC=clang-6.0 && CXX=clang++-6.0"
+      before_install:
+        - pip install --user cpp-coveralls
+      before_script:
+        - cd Taylan/dsa/Singly-Linked-List/cpp
+      script:
+        # Link gcc-6 and g++-6 to their standard commands
+        #- ln -s /usr/bin/gcc-6 /usr/local/bin/gcc
+        #- ln -s /usr/bin/g++-6 /usr/local/bin/g++
+        # Export CC and CXX to tell cmake which compiler to use
+        - export CC=/usr/bin/gcc-6
+        - export CXX=/usr/bin/g++-6
+        # Check versions of gcc, g++ and cmake
+        - gcc -v && g++ -v && cmake --version
+        # Run your build commands next
+        - cmake -H. -Bbuild
+        - cd build
+        - cmake --build .
+        - ./bin/unit_tests
+      after_success:
+        - coveralls --root .. -E ".*external.*" -E ".*CMakeFiles.*" -E ".*test/.*.cpp.*" -E ".*googletest/.*"
+notifications:
+  email: false

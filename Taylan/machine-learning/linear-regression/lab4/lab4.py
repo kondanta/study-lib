@@ -107,3 +107,4 @@ def print_mse_for_all_data(errors):
 
 
 do_calculation()
+
