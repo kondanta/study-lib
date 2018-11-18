@@ -113,3 +113,22 @@ void List::insert(int index, int value){
   node->setNext(tmp->getNext());
   tmp->setNext(node);
 }
+
+void List::erase(int index){
+  Node<int> *tmp = this->_head;
+  if(index == 0){
+    this->_head = this->_head->getNext();
+    delete tmp;
+    return;
+  }
+  if(index >= size()){
+    popTail();
+    return;
+  }
+  for(int i = 0; i < index - 1; ++i){
+    tmp = tmp->getNext();
+  }
+  tmp->setNext(tmp->getNext()->getNext());
+  delete tmp;
+}
+

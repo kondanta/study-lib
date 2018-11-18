@@ -167,3 +167,27 @@ TEST_F(ListTest, InsertKthPosition){
   EXPECT_EQ(12, _lst->valueAt(3));
 }
 
+TEST_F(ListTest, ShouldEraseTheHead){
+  _lst->initList(10);
+  _lst->append(7);
+  _lst->erase(0);
+  EXPECT_EQ(7, _lst->getHeadValue());
+}
+
+TEST_F(ListTest, ShouldEraseTailIfIndexIsBiggerThanSize){
+  _lst->initList(10);
+  _lst->append(5);
+  _lst->erase(20);
+  EXPECT_EQ(10, _lst->getTailValue());
+}
+
+TEST_F(ListTest, ShouldEraseFromKthPosition){
+  _lst->initList(0);
+  for (int i = 1; i < 10; ++i) {
+    _lst->append(i);
+  }
+  _lst->erase(3);
+  EXPECT_EQ(4, _lst->valueAt(3));
+  EXPECT_EQ(9, _lst->size());
+}
+
