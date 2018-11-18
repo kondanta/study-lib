@@ -201,3 +201,17 @@ TEST_F(ListTest, ShouldReverseTheList){
   EXPECT_EQ(9, _lst->getHeadValue());
 }
 
+TEST_F(ListTest, ShouldReturnToHeadValueFromBackIfIndexBiggerThanSize){
+  _lst->initList(3);
+  _lst->append(7);
+  EXPECT_EQ(3, _lst->kthValueFromTail(200));
+}
+
+TEST_F(ListTest, ShouldReturnToValueFromBack){
+  _lst->initList(0);
+  for (int i = 1; i < 10; ++i) {
+    _lst->append(i);
+  }
+  EXPECT_EQ(0, _lst->kthValueFromTail(10));
+}
+

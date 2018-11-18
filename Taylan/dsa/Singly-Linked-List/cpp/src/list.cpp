@@ -146,3 +146,7 @@ void List::reverse(){
   this->_head = reversedList;
 }
 
+int List::kthValueFromTail(int index){
+  index >= size() ? index = size() - 1 : index;
+  return valueAt((size() - 1) - index);
+}

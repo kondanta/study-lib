@@ -22,6 +22,7 @@ public:
   void insert(int/*index*/, int/*value*/);
   void erase(int);
   void reverse();
+  int kthValueFromTail(int);
 };
 
 
