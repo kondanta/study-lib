@@ -189,20 +189,16 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 
 # do_calculation()
-
-poly_req = PolynomialFeatures(degree=4)
-regressor = LinearRegression()
-
-x_poly = poly_req.fit_transform(X)
-regressor.fit(x_poly, y)
-
-y_pred = regressor.predict(poly_req.fit_transform(X_test))
-
-print("Accurracy: ", regressor.score(poly_req.fit_transform(X_test), y_test))
+#print("Accurracy: ", regressor.score(poly_req.fit_transform(X_test), y_test))
 
 pred_list = create_actual_data_lists("project-data.csv")
 pred_list = np.transpose(pred_list)
+regressor = LinearRegression()
 
-print("pred:",regressor.predict(poly_req.fit_transform(pred_list)))
-
+for i in range(1, 6):
+    poly_req = PolynomialFeatures(degree=i)
+    x_poly = poly_req.fit_transform(X)
+    regressor.fit(x_poly, y)
+    print("Acc: ", regressor.score(poly_req.fit_transform(X_test), y_test))
+    print("pred:",regressor.predict(poly_req.fit_transform(pred_list)))
 
