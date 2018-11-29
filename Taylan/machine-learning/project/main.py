@@ -1,5 +1,7 @@
-from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LinearRegression, Ridge
 from sklearn.model_selection import LeaveOneOut, train_test_split
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.pipeline import make_pipeline
 from sklearn import metrics
 import numpy as np
 import matplotlib.pyplot as plt
@@ -61,7 +63,7 @@ def calculate_error(predictions, y):
 X, y = create_lists("project-data.csv")
 X = np.transpose(X)
 
-# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 
 # clf = LinearRegression(n_jobs=-1)
 
@@ -85,101 +87,122 @@ X = np.transpose(X)
 # plt.scatter(pred_set, pred_err, c='r')
 # plt.show()
 
-model = LinearRegression()
+# model = LinearRegression()
 
-def do_calculation():
-    X, y = create_lists('project-data.csv')
-    X = np.transpose(X)
+# def do_calculation():
+#     X, y = create_lists('project-data.csv')
+# #    X = np.transpose(X)
 
-    reg = LinearRegression()
-    reg.fit(X, y)  # training with all data
-    predictions = reg.predict(X)  # predictions from training
-    err = calculate_error(predictions, y)
+#     md = make_pipeline(PolynomialFeatures(degree=3), Ridge())
+#     md.fit(X,y)
+#     y_p = md.predict(X)
+#     print(y_p)
 
-    print_mse_for_all_data(err)  # just in case
+#     model.fit(X, y)  # training with all data
+#     predictions = model.predict(X)  # predictions from training
+#     err = calculate_error(predictions, y)
 
-    test_pred, test_err = leave_one_out(X, y)
+#     print_mse_for_all_data(err)  # just in case
 
-    pred_list = create_actual_data_lists('project-data.csv')
+#     test_pred, test_err = leave_one_out(X, y)
+
+#     pred_list = create_actual_data_lists('project-data.csv')
    
-    pr = predict_values(pred_list, y)
-    print(pr[0])
+#     pr = predict_values(pred_list, y)
+#     print(pr[0])
     
-    plot(predictions, err, test_pred, test_err)
+#     plot(predictions, err, test_pred, test_err)
     
 
 
-def predict_values(pred_list, y):
-    pred_list = np.transpose(pred_list)
-    pred_set = model.predict(pred_list)
-    pred_err = calculate_error(pred_set, y)
+# def predict_values(pred_list, y):
+#     pred_list = np.transpose(pred_list)
+#     pred_set = model.predict(pred_list)
+#     pred_err = calculate_error(pred_set, y)
 
-    return pred_set, pred_err
+#     return pred_set, pred_err
 
-def calculate_error(predictions, y):
-    """
-    Calculating the error margin
-    """
-    error = []
-    for i, pred in enumerate(predictions):
-        error.append(pred - y[i])
-    return error
-
-
-def plot(predictions, errors, test_pred, test_err):
-    """
-    Plot predicted Y values against each X's error margin
-    """
-    plt.scatter(predictions, errors, c='b')
-    plt.scatter(test_pred, test_err, c='r')
-    plt.hlines(0, 0, 40000)
-    plt.show()
+# def calculate_error(predictions, y):
+#     """
+#     Calculating the error margin
+#     """
+#     error = []
+#     for i, pred in enumerate(predictions):
+#         error.append(pred - y[i])
+#     return error
 
 
-def leave_one_out(X, y):
-    ytest, ypred = loo_training(X, y)
-    err = []
-    for i in range(len(ytest)):
-        err.append(ypred[i] - ytest[i])
-    print_mean_square_error(ytest, ypred)
-    return ypred, err
+# def plot(predictions, errors, test_pred, test_err):
+#     """
+#     Plot predicted Y values against each X's error margin
+#     """
+#     plt.scatter(predictions, errors, c='b')
+#     plt.scatter(test_pred, test_err, c='r')
+#     plt.hlines(0, 0, 40000)
+#     plt.show()
 
 
-def loo_training(X, y):
-    ytests = []
-    ypredictions = []
-    loo = LeaveOneOut()
-
-    for train_index, test_index in loo.split(X):
-        # one row at a time
-        X_train, X_test = X[train_index], X[test_index]
-        y_train, y_test = y[train_index], y[test_index]
-
-        #model = LinearRegression()
-        model.fit(X=X_train, y=y_train)
-        y_pred = model.predict(X_test)
-
-        ytests += list(y_test)
-        ypredictions += list(y_pred)
-        print("Test confidence: {0}, \
-        Train confidence: {1} " .format(model.score(X_test, y_test),
-                                        model.score(X_train, y_train)))
-
-    return ytests, ypredictions
+# def leave_one_out(X, y):
+#     ytest, ypred = loo_training(X, y)
+#     err = []
+#     for i in range(len(ytest)):
+#         err.append(ypred[i] - ytest[i])
+#     print_mean_square_error(ytest, ypred)
+#     return ypred, err
 
 
-def print_mean_square_error(ytests, ypred):
-    rr = metrics.r2_score(ytests, ypred)
-    ms_error = metrics.mean_squared_error(ytests, ypred)
-    print("Leave One Out Cross Validation")
-    print("R^2: {:.5f}% MSE: {:.5f}".format(rr*100, ms_error))
+# def loo_training(X, y):
+#     ytests = []
+#     ypredictions = []
+#     loo = LeaveOneOut()
+
+#     for train_index, test_index in loo.split(X):
+#         # one row at a time
+#         X_train, X_test = X[train_index], X[test_index]
+#         y_train, y_test = y[train_index], y[test_index]
+
+#         #model = LinearRegression()
+#         model.fit(X=X_train, y=y_train)
+#         y_pred = model.predict(X_test)
+
+#         ytests += list(y_test)
+#         ypredictions += list(y_pred)
+#         print("Test confidence: {0}, \
+#         Train confidence: {1} " .format(model.score(X_test, y_test),
+#                                         model.score(X_train, y_train)))
+
+#     return ytests, ypredictions
 
 
-def print_mse_for_all_data(errors):
-    error = np.square(errors)
-    error = np.mean(error)
+# def print_mean_square_error(ytests, ypred):
+#     rr = metrics.r2_score(ytests, ypred)
+#     ms_error = metrics.mean_squared_error(ytests, ypred)
+#     print("Leave One Out Cross Validation")
+#     print("R^2: {:.5f}% MSE: {:.5f}".format(rr*100, ms_error))
 
-    print("MSE for all data: {:.5}". format(error))
+
+# def print_mse_for_all_data(errors):
+#     error = np.square(errors)
+#     error = np.mean(error)
+
+#     print("MSE for all data: {:.5}". format(error))
 
 
-do_calculation()
+# do_calculation()
+
+poly_req = PolynomialFeatures(degree=4)
+regressor = LinearRegression()
+
+x_poly = poly_req.fit_transform(X)
+regressor.fit(x_poly, y)
+
+y_pred = regressor.predict(poly_req.fit_transform(X_test))
+
+print("Accurracy: ", regressor.score(poly_req.fit_transform(X_test), y_test))
+
+pred_list = create_actual_data_lists("project-data.csv")
+pred_list = np.transpose(pred_list)
+
+print("pred:",regressor.predict(poly_req.fit_transform(pred_list)))
+
+
