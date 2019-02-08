@@ -64,6 +64,29 @@ impl Node {
     }
 }
 
+#[derive(Debug)]
+// 'a indicates the life time. Compiler helps it
+struct Test<'a> {
+    s: &'a str,
+}
+
+trait Show {
+    fn show(&self) -> String;
+}
+
+impl Show for i32 {
+    fn show(&self) -> String {
+        format!("Four-byte Signed {}", self)
+    }
+}
+
+fn dmp<T>(value: &T)
+where
+    T: std::fmt::Debug,
+{
+    println!("Val is {:?}", value);
+}
+
 fn main() {
     let t = add_tuple(2.0, 3.0);
     println!("t: {:?}", t);
@@ -90,7 +113,7 @@ fn main() {
     // Closures! => Anounymous functions.
     // Also they seem to be type agnostic.
     let f = |x| x * x;
-    println!("{:?}", f(1));
+    println!("{:?}", f(2));
 
     let mut root = Node::new("root");
     root.set_left(Node::new("left"));
@@ -99,4 +122,21 @@ fn main() {
     println!("arr {:#?}", root);
 
     //TODO:: continue from generic structs.
+    // 16.1.19
+    let a = "Hmm".to_string();
+    let t1 = Test { s: &a };
+    println!("{:?}", t1);
+    // using trait
+    println!("show {}", 42.show());
+
+    // Just for testing something
+    // addin _ infront of a variable marks it
+    // will not be used
+    let _child = std::process::Command::new("/bin/cat")
+        .arg("languages.org")
+        .current_dir("~/documents/notes")
+        .stdout(std::process::Stdio::piped())
+        .spawn();
+    // Generic functions
+    dmp(&42.0);
 }
