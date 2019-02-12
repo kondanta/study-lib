@@ -21,3 +21,8 @@ cmake-build-debug
 *.exe
 *.out
 *.app
+
+# java things
+.idea/
+out/
+
