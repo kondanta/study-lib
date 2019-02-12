@@ -1,3 +1,4 @@
+
 *.exe
 __pychache__/
 *.class
@@ -25,4 +26,3 @@ cmake-build-debug
 # java things
 .idea/
 out/
-
