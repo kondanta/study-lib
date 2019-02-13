@@ -1,34 +1,22 @@
 package com.kondanta;
 
 public class ThreadSpawner implements Runnable {
-    private Thread t;
-    private String threadName;
     private String fileName;
-    private String searchedWord;
+    private FileAccessors fileAccessors;
 
-    ThreadSpawner(String name, String file, String searchedWord){
-        System.out.printf("Creating: %s", name);
-        this.threadName = name;
+
+    /**
+     * @param file          File name that is going to be parsed
+     * @param fileAccessors Dependency injection for accessing
+     *                      "read" function of the FileAccessors
+     */
+    ThreadSpawner(String file, FileAccessors fileAccessors) {
         this.fileName = file;
-        this.searchedWord = searchedWord;
+        this.fileAccessors = fileAccessors;
     }
 
     @Override
     public void run() {
-        FileAccessors acc = new FileAccessors();
-
-        System.out.println("Running " +  threadName );
-        acc.read(this.fileName);
-        // Let the thread sleep for a while.
-        System.out.println("Thread " +  threadName + " exiting.");
-        acc.printer(this.searchedWord);
-    }
-
-    void start() {
-        System.out.println("Starting " +  threadName );
-        if (t == null) {
-            t = new Thread (this, threadName);
-            t.start ();
-        }
+        fileAccessors.read(this.fileName);
     }
 }
