@@ -11,12 +11,23 @@ class FileAccessors{
      * Hash table that is going to store parsed strings and their occurrence
      * numbers
      */
-    private static HashMap<String, Integer> occurrenceTable =
-            new HashMap<>();
+    private HashMap<String, Integer> occurrenceTable;
     /**
      * Mutex for multi threaded approach
      */
     private final Object lock = new Object();
+
+    /**
+     * Injecting global hash map into the FileAccessors class. With that
+     * we can stop relying on static occurrenceTable to keep track of key
+     * value pairs.
+     *
+     * @param table Global hash map.
+     */
+    FileAccessors(HashMap<String, Integer> table) {
+        this.occurrenceTable = table;
+    }
+
 
 
     /**
@@ -51,7 +62,10 @@ class FileAccessors{
      * @return Value of the key
      */
     private Integer value(String key) {
-        return occurrenceTable.get(key);
+        if (isExists(key)) {
+            return occurrenceTable.get(key);
+        }
+        return 0;
     }
 
     /**
